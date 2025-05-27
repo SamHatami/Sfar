@@ -1,6 +1,6 @@
 ﻿namespace Sfär.Core.Components;
 
-public struct PhysicalProperty
+public struct PhysicalComponent
 {
     int Mass { get; set; }
     int Size { get; set; }

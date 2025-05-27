@@ -4,6 +4,8 @@ namespace Sfär.Core.Cluster;
 
 public class Body
 {
-    SpatialProperty SpatialProperties;
-    PhysicalProperty PhysicalProperties;
+    public int ID;
+    
+    SpatialComponent _spatialComponents;
+    PhysicalComponent _physicalComponents;
 }
