@@ -3,19 +3,12 @@
 
 using System.Timers;
 using Sfär.Core;
+using Sfär.Core.Orbits;
 
-Time time = new Time(0, 1, 1, 1);
+OrbitalTrajectory orbitalTrajectory = new OrbitalTrajectory();
 
-time.Start();
-time.tick.Elapsed += TickOnElapsed;
-Console.ReadKey();
-void TickOnElapsed(object? sender, ElapsedEventArgs e)
-{
-    Console.WriteLine($"Current hour: {time.Hour}");
-    Console.WriteLine($"Current day: {time.Day}");
-    Console.WriteLine($"Current month: {time.Month}");
-    Console.WriteLine($"Current cycle: {time.Cycle}");
-}
+orbitalTrajectory.CreateEllipseInSpace(80000,90000,10,0,10);
+
 
 
 

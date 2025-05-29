@@ -1,4 +1,4 @@
-﻿using Vector3 = Sfär.Core.Cluster.Vector3;
+﻿using Sfär.Core.Cluster;
 
 namespace Sfär.Core.Components;
 
