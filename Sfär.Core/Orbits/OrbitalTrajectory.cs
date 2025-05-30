@@ -27,9 +27,16 @@ public class OrbitalTrajectory
                 _universeCenter+majorAxis*Math.Cos(radStep*i)*Math.Sin(theta)+minorAxis*Math.Sin(radStep*i)*Math.Cos(theta));
             positions[i].Z = 0;
             
+            positions[i] = positions[i].Rotate(Axis.X, xTilt);
+            positions[i] = positions[i].Rotate(Axis.Y, yTilt);
+            positions[i] = positions[i].Rotate(Axis.Z, zTilt);
+            
             coordinates[i].X = positions[i].X;
             coordinates[i].Y = positions[i].Y;
         }
+        
+        //If any of the tilts are added we do the actual rotations in space here
+        
         
         
         int structSize = Unsafe.SizeOf<Vector3>();

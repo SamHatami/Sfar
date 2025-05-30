@@ -7,7 +7,7 @@ using Sfär.Core.Orbits;
 
 OrbitalTrajectory orbitalTrajectory = new OrbitalTrajectory();
 
-orbitalTrajectory.CreateEllipseInSpace(80000,90000,10,0,10);
+orbitalTrajectory.CreateEllipseInSpace(90000,90000,3,2,10);
 
 
 
