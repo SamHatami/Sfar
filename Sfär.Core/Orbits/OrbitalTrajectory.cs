@@ -6,7 +6,6 @@ namespace Sfär.Core.Orbits;
 
 public class OrbitalTrajectory
 {
-    // rotate ellipse in 2d: https://math.stackexchange.com/questions/2645689/what-is-the-parametric-equation-of-a-rotated-ellipse-given-the-angle-of-rotatio
     //parametic form of ellipse: https://math.stackexchange.com/questions/22064/calculating-a-point-that-lies-on-an-ellipse-given-an-angle
     
     private static readonly int steps = 1000; //Resolution, might need to increase the bigger the distances
@@ -15,7 +14,7 @@ public class OrbitalTrajectory
     Coordinates[] coordinates = new Coordinates[steps];
     
     //Theta is rotation against the normal axis before 3d tranformation [rad]
-    public void CreateEllipseInSpace(int minorAxis, int majorAxis, int xTilt, int yTilt, int zTilt, double theta = 0)
+    public void CreateEllipseInSpace(int minorAxis, int majorAxis, int xTilt = 0, int yTilt = 0, int zTilt = 0, double theta = 0)
     { 
         var radStep = (2*Math.PI) / steps;
         var ellipsoidal_factor = 0.1;
@@ -30,13 +29,12 @@ public class OrbitalTrajectory
             positions[i] = positions[i].Rotate(Axis.X, xTilt);
             positions[i] = positions[i].Rotate(Axis.Y, yTilt);
             positions[i] = positions[i].Rotate(Axis.Z, zTilt);
-            
-            coordinates[i].X = positions[i].X;
-            coordinates[i].Y = positions[i].Y;
+            //
+            // coordinates[i].X = positions[i].X;
+            // coordinates[i].Y = positions[i].Y;
         }
         
-        //If any of the tilts are added we do the actual rotations in space here
-        
+
         
         
         int structSize = Unsafe.SizeOf<Vector3>();

@@ -1,8 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-
-using System.Timers;
-using Sfär.Core;
 using Sfär.Core.Orbits;
 
 OrbitalTrajectory orbitalTrajectory = new OrbitalTrajectory();

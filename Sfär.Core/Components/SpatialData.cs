@@ -2,7 +2,7 @@
 
 namespace Sfär.Core.Components;
 
-public struct SpatialComponent : IComponent
+public struct SpatialData : IComponent
 {
     int Distance { get; set; }
     Vector3 Position { get; set; }
