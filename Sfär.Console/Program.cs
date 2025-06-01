@@ -2,11 +2,11 @@
 
 using Sfär.Core.Orbits;
 
-OrbitalTrajectory orbitalTrajectory = new OrbitalTrajectory();
 
-orbitalTrajectory.CreateEllipseInSpace(90000,90000,3,2,10);
-
-
+void This()
+{
+    //the compiler doesnt like an empty program.cs
+}
 
 
 
