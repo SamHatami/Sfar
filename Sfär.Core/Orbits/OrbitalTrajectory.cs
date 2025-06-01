@@ -4,18 +4,18 @@ using ScottPlot;
 using Sfär.Core.Cluster;
 namespace Sfär.Core.Orbits;
 
-public class OrbitalTrajectory
+public static class OrbitalTrajectory
 {
     //parametic form of ellipse: https://math.stackexchange.com/questions/22064/calculating-a-point-that-lies-on-an-ellipse-given-an-angle
     
     private static readonly int steps = 1000; //Resolution, might need to increase the bigger the distances
     private static int _universeCenter = GlobalSettings.UniverseSize/2;
-    Vector3[] positions = new Vector3[steps];
-    Coordinates[] coordinates = new Coordinates[steps];
+
     
     //Theta is rotation against the normal axis before 3d tranformation [rad]
-    public void CreateEllipseInSpace(int minorAxis, int majorAxis, int xTilt = 0, int yTilt = 0, int zTilt = 0, double theta = 0)
+    public static Vector3[] CreateEllipseInSpace(int minorAxis, int majorAxis, int xTilt = 0, int yTilt = 0, int zTilt = 0, double theta = 0)
     { 
+        Vector3[] positions = new Vector3[steps];
         var radStep = (2*Math.PI) / steps;
         var ellipsoidal_factor = 0.1;
         for (int i = 0; i < steps; i++)
@@ -34,23 +34,25 @@ public class OrbitalTrajectory
             // coordinates[i].Y = positions[i].Y;
         }
         
+        #if DEBUG
+        PrintArraySize(positions);
+        #endif
+ 
+        return positions;
+    }
 
-        
-        
+    private static void PrintArraySize(Vector3[] positions)
+    {
         int structSize = Unsafe.SizeOf<Vector3>();
         int arraySize = steps * structSize;
         Console.WriteLine($"One Vector3: {structSize} bytes");
         Console.WriteLine($"{steps} Vector3s: {arraySize} bytes ({arraySize / 1024.0:F1} KB)");
-        
-        PrintTrajectory();
-        
     }
-
-    void PrintTrajectory()
-    {
-        var plot = new ScottPlot.Plot();
-        plot.Add.Scatter(coordinates);
-        plot.Axes.SquareUnits();
-        plot.SavePng("OrbitalTrajectory.png",4000, 4000);
-    }
+    // void PrintTrajectory()
+    // {
+    //     var plot = new ScottPlot.Plot();
+    //     plot.Add.Scatter(coordinates);
+    //     plot.Axes.SquareUnits();
+    //     plot.SavePng("OrbitalTrajectory.png",4000, 4000);
+    // }
 }

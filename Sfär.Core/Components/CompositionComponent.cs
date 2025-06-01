@@ -1,8 +1,11 @@
-﻿namespace Sfär.Core.Components;
+﻿using Sfär.Core.Components.DataBases;
+
+namespace Sfär.Core.Components;
 
 public struct CompositionComponent
 {
-    //material[] materials
+    public Dictionary<MaterialType, int> Materials { get; set; }
+    
 }
 
 //Imaterial => density, value, tier

@@ -1,16 +1,56 @@
-﻿using Sfär.Core.Entities;
+﻿using Sfär.Core.Components;
+using Sfär.Core.Components.CelestialBodies;
+using Sfär.Core.Entities;
+using Sfär.Core.Orbits;
 
 namespace Sfär.Core.Cluster;
 
 public static class SolarSystemGenerator
 {
-    public static Entity[] Create(int seed = 0)
+    public static IEntity[] Create(int seed = 0)
     {
-        List<Entity> entities = new List<Entity>();
+        List<IEntity> entities = new List<IEntity>();
         var random = new Random();
+        
+        //Create the sun
+        var sunEntity = EntityCreator.Create();
+        sunEntity.Label = "Sun"; // Perhaps a name generator?
 
+        var sunData = new StarData()
+        {
+            Age = 2,
+            Luminosity = 1f,
+            SpectralClass = "G",
+            Mass = 1,
+            Size = 1
+
+        };
+        
+        entities.Add(sunEntity);
+        
+        
         int nrOfPlanets = random.Next(8, 12);
         
+        //Create sizes and distances
+        for (int i = 0; i < nrOfPlanets; i++)
+        {
+            
+        }
+        //Create orbits
+        
+        //Create moons and add to planets
+        
+        //Create asteroidfield
+        
+        //
+        
+        for (int i = 0; i < nrOfPlanets; i++)
+        {
+            var entity = EntityCreator.Create();
+
+            entities.Add(entity);
+            
+        }
         return entities.ToArray();
     }
 }
