@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Sfär.Core.Components.CelestialBodies;
 using Sfär.Core.Entities;
 
 namespace Sfär.Core.Components;
@@ -9,8 +10,10 @@ public static class ComponentManager
     static CelestialBodyData[] PhysicalComponents = new CelestialBodyData[GlobalSettings.MaxEntities];
     static CompositionComponent[]  CompositionComponents = new CompositionComponent[GlobalSettings.MaxEntities];
     static OrbitData[] OrbitComponents = new OrbitData[GlobalSettings.MaxEntities];
+    static StarData[] StarComponents = new StarData[GlobalSettings.MaxEntities]; //Really need max entities?
+    static PlanetData[] PlanetComponents = new PlanetData[GlobalSettings.MaxEntities]; //Really need max entities?
 
-    //Extension to Ientities
+    //Extension 
     public static void AddComponent<T>(this IEntity entity, T component) where T : IComponent
     {
         switch (component)
@@ -27,6 +30,14 @@ public static class ComponentManager
             case OrbitData orbitComponent:
                 OrbitComponents[entity.Id] = orbitComponent;
                 break;
+            case StarData starComponent:
+                StarComponents[entity.Id] = starComponent;
+                break;
+            case PlanetData planetComponent:
+                PlanetComponents[entity.Id] = planetComponent;
+                break;
+            default:
+                throw new InvalidEnumArgumentException();
         }
     }
 

@@ -1,7 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using ScottPlot;
-using Sfär.Core.Cluster;
+using Sfär.Core.Utility;
+
 namespace Sfär.Core.Orbits;
 
 public static class OrbitalTrajectory

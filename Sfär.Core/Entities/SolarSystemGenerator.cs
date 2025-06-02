@@ -1,9 +1,7 @@
 ﻿using Sfär.Core.Components;
 using Sfär.Core.Components.CelestialBodies;
-using Sfär.Core.Entities;
-using Sfär.Core.Orbits;
 
-namespace Sfär.Core.Cluster;
+namespace Sfär.Core.Entities;
 
 public static class SolarSystemGenerator
 {
@@ -38,8 +36,8 @@ public static class SolarSystemGenerator
             
             planetEntity.AddComponent(new PlanetData()
             {
-                Mass = 2,
-                Size = 2,
+                Mass = 2, //Randomize within
+                Size = 2, //Randomize within
             });
         }
         //Create orbits

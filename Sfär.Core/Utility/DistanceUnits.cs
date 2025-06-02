@@ -1,4 +1,4 @@
-﻿namespace Sfär.Core.Cluster;
+﻿namespace Sfär.Core.Utility;
 
 public static class DistanceUnits
 {
