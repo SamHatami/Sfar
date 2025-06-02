@@ -16,7 +16,7 @@ public static class SolarSystemGenerator
         var sunEntity = EntityCreator.Create();
         sunEntity.Label = "Sun"; // Perhaps a name generator?
 
-        var sunData = new StarData()
+        sunEntity.AddComponent(new StarData()
         {
             Age = 2,
             Luminosity = 1f,
@@ -24,8 +24,7 @@ public static class SolarSystemGenerator
             Mass = 1,
             Size = 1
 
-        };
-        
+        });
         entities.Add(sunEntity);
         
         
@@ -34,7 +33,14 @@ public static class SolarSystemGenerator
         //Create sizes and distances
         for (int i = 0; i < nrOfPlanets; i++)
         {
+            var planetEntity = EntityCreator.Create();
+            planetEntity.Label = "Planet " + i.ToString();
             
+            planetEntity.AddComponent(new PlanetData()
+            {
+                Mass = 2,
+                Size = 2,
+            });
         }
         //Create orbits
         
@@ -45,6 +51,7 @@ public static class SolarSystemGenerator
         //
         
         for (int i = 0; i < nrOfPlanets; i++)
+            
         {
             var entity = EntityCreator.Create();
 

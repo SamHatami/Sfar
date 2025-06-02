@@ -3,7 +3,10 @@
 using Sfär.Core.Orbits;
 
 
-
+void This()
+{
+    //the compiler doesnt like an empty program.cs
+}
 
 
 

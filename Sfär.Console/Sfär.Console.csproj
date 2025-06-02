@@ -11,8 +11,4 @@
       <ProjectReference Include="..\Sfär.Core\Sfär.Core.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="ScottPlot" Version="5.0.55" />
-    </ItemGroup>
-
 </Project>
