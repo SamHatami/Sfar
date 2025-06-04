@@ -8,3 +8,8 @@ public static class DistanceUnits
     public const int LargeDistance = 1000000; //middle of the larger system
     public const int FarDistance = 100000000; //edge of the larger system
 }
+
+public static class SizeUnits
+{
+    //
+}

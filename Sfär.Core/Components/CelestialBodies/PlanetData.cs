@@ -1,11 +1,14 @@
-﻿namespace Sfär.Core.Components.CelestialBodies;
+﻿using Sfär.Core.Components.DataBases;
 
-public class PlanetData: IComponent
+namespace Sfär.Core.Components.CelestialBodies;
+
+public struct PlanetData: IComponent
 {
     public int Mass { get; set; } //integer multiples of earth mass
-    public int Size { get; set; } //integer multiples of earth radius, float in the future?
+    public float Size { get; set; } //integer multiples of earth radius, float in the future?
     public int Density { get; set; }
     public float SurfaceGravity { get; set; }
     public int Moons { get; set; } //requires moon id linkage?
+    public Dictionary<MaterialType, int> Compostion { get; set; }
     
 }
