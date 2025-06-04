@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c0695213-6338-487c-be92-4997af30d322" name="Changes" comment="" />
+    <list default="true" id="c0695213-6338-487c-be92-4997af30d322" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sfär.Core/Components/CelestialBodies/PlanetData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sfär.Core/Components/CelestialBodies/PlanetData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sfär.Core/Entities/PlanetCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sfär.Core/Entities/PlanetCreator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sfär.Core/GlobalSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sfär.Core/GlobalSettings.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,9 +15,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2xw9GEN5cbJYjRupen4uchtFc20" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -21,7 +26,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -42,6 +47,7 @@
       <option name="presentableId" value="Default" />
       <updated>1748838170944</updated>
       <workItem from="1748838172242" duration="86000" />
+      <workItem from="1749060092480" duration="45000" />
     </task>
     <servers />
   </component>
