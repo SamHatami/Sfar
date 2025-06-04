@@ -11,4 +11,6 @@ public struct PlanetData: IComponent
     public int Moons { get; set; } //requires moon id linkage?
     public Dictionary<MaterialType, int> Compostion { get; set; }
     
+    public Dictionary<MaterialType, int> Compostion { get; set; }
+    
 }
