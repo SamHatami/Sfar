@@ -9,5 +9,5 @@ public enum CelestialObjectType
     Nebula,
     SpaceStation,
     Outpost,
-    Star,
+    Star
 }

@@ -7,6 +7,5 @@ public enum PlanetType
     Gas,
     Rock,
     Iron,
-    
-    
+    Lava
 }

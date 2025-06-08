@@ -2,7 +2,7 @@
 
 public struct MoonData
 {
-    int Mass { get; set; }
-    int Size { get; set; }
-    int ParentId { get; set; } // this creates local orbit?
+    private int Mass { get; set; }
+    private int Size { get; set; }
+    private int ParentId { get; set; } // this creates local orbit?
 }

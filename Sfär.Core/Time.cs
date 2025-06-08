@@ -5,14 +5,8 @@ namespace Sfär.Core;
 
 public class Time
 {
-    public Timer tick { get; private set; }
-    private int _timeStep => 6000/TimeMultiplier; // 6 real time seconds corresponds to one hour
-    public int TimeMultiplier { get; set; } = 10; // 2 / 4 / 6 
-    public int Cycle { get; set; } // Corresponds to year
-    public int Month { get; set; } 
-    public int Day { get; set; } 
-    public int Hour { get; set; }
-    
+    private int _totalHours;
+
     public Time(int cycle, int month, int day, int currentHour = 0)
     {
         Cycle = cycle;
@@ -20,24 +14,36 @@ public class Time
         Day = day;
     }
 
+    public Timer timer { get; private set; }
+    public static int tick => 100 ; // time that corresponds to ingame hour
+    public static int TimeStep { get; set; } = 1; // 2 / 4 / 6 
+    public int Cycle { get; set; } // Corresponds to year
+    public int Month { get; set; }
+    public int Day { get; set; }
+    public int Hour { get; set; }
+
     public void Start()
     {
-        tick = new Timer();
-        tick.Interval = _timeStep;
-        tick.Start();
-        tick.Elapsed += TimerOnElapsed;
+        timer = new Timer();
+        timer.Interval = tick;
+        timer.Start();
+        timer.Elapsed += TimerOnElapsed;
     }
 
     private void TimerOnElapsed(object? sender, ElapsedEventArgs e)
     {
-        Hour = (Hour +1) % 24 ;
-        
-        Day = (Day + (Hour % 24 == 0 ? 1 : 0) % 30);
-        
-        Month = (Month + (Day % 30 == 0 ? 1 : 0) % 12);
-        
-        Cycle = (Cycle + (Month % 12 == 0 ? 1 : 0));
-    }
+        Hour += TimeStep;
     
+        if (Hour < 24) return;
+        Day += Hour / 24;
+        Hour %= 24;
 
+        if (Day < 30) return;
+        Month += Day / 30;
+        Day %= 30;
+
+        if (Month < 12) return;
+        Cycle += Month / 12;
+        Month %= 12;
+    }
 }

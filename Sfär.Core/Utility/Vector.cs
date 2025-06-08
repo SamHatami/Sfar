@@ -1,7 +1,7 @@
 ﻿namespace Sfär.Core.Utility;
 
 /// <summary>
-/// A vector with three integer values, representing a point or a vector in space
+///     A vector with three integer values, representing a point or a vector in space
 /// </summary>
 public struct Vector3
 {
@@ -18,7 +18,7 @@ public struct Vector3
 }
 
 /// <summary>
-/// A vector with two integer values, representing a point or a vector on a plane
+///     A vector with two integer values, representing a point or a vector on a plane
 /// </summary>
 public struct Vector2
 {
@@ -31,10 +31,17 @@ public struct Vector2
         Y = y;
         Magnitude = x * x + y * y;
     }
+    
 }
 
 public static class VectorExtension
 {
+
+    public static int Distance(this Vector3 vec1, Vector3 vec2)
+    {
+        return (int)Math.Sqrt(Math.Pow(vec1.X - vec2.X, 2) + Math.Pow(vec1.Y - vec2.Y, 2) + Math.Pow(vec1.Z - vec2.Z, 2));
+        
+    }
     public static Vector3 Rotate(this Vector3 vec, Axis axis, int angleRad)
     {
         var rotationMatrix = axis switch
@@ -45,14 +52,16 @@ public static class VectorExtension
             _ => new double[3, 3]
         };
 
-    
+
         return new Vector3
         {
-            X = (int)Math.Round(rotationMatrix[0, 0] * vec.X + rotationMatrix[0, 1] * vec.Y + rotationMatrix[0, 2] * vec.Z),
-            Y = (int)Math.Round(rotationMatrix[1, 0] * vec.X + rotationMatrix[1, 1] * vec.Y + rotationMatrix[1, 2] * vec.Z),
-            Z = (int)Math.Round(rotationMatrix[2, 0] * vec.X + rotationMatrix[2, 1] * vec.Y + rotationMatrix[2, 2] * vec.Z)
+            X = (int)Math.Round(rotationMatrix[0, 0] * vec.X + rotationMatrix[0, 1] * vec.Y +
+                                rotationMatrix[0, 2] * vec.Z),
+            Y = (int)Math.Round(rotationMatrix[1, 0] * vec.X + rotationMatrix[1, 1] * vec.Y +
+                                rotationMatrix[1, 2] * vec.Z),
+            Z = (int)Math.Round(rotationMatrix[2, 0] * vec.X + rotationMatrix[2, 1] * vec.Y +
+                                rotationMatrix[2, 2] * vec.Z)
         };
-
     }
 
     private static double[,] RotationZ(int angleRad)
@@ -77,7 +86,7 @@ public static class VectorExtension
         {
             { cosA, 0, sinA },
             { 0, 1, 0 },
-            { -sinA, 0, cosA },
+            { -sinA, 0, cosA }
         };
 
         return rotationY;
@@ -91,7 +100,7 @@ public static class VectorExtension
         {
             { 1, 0, 0 },
             { 0, cosA, -sinA },
-            { 0, sinA, cosA },
+            { 0, sinA, cosA }
         };
 
         return rotationY;

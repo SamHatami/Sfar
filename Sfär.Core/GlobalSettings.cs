@@ -3,8 +3,8 @@
 public static class GlobalSettings
 {
     public const int MaxEntities = 100000;
+    public const int MaxComponents = 64;
     public const int UniverseSize = 100000000;
-    
 }
 
 public static class PlanetSizes
@@ -21,5 +21,4 @@ public static class PlanetSizes
     public const int ExoProbability = 40; //%
     public const int MidProbability = 20; //%
     public const int MoonProbability = 35; //%
-    
 }

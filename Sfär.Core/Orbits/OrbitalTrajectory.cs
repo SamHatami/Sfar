@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using ScottPlot;
 using Sfär.Core.Utility;
 
@@ -8,52 +7,110 @@ namespace Sfär.Core.Orbits;
 public static class OrbitalTrajectory
 {
     //parametic form of ellipse: https://math.stackexchange.com/questions/22064/calculating-a-point-that-lies-on-an-ellipse-given-an-angle
-    
-    private static readonly int steps = 1000; //Resolution, might need to increase the bigger the distances
-    private static int _universeCenter = GlobalSettings.UniverseSize/2;
 
-    
-    //Theta is rotation against the normal axis before 3d tranformation [rad]
-    public static Vector3[] CreateEllipseInSpace(int minorAxis, int majorAxis, int xTilt = 0, int yTilt = 0, int zTilt = 0, double theta = 0)
-    { 
-        Vector3[] positions = new Vector3[steps];
-        var radStep = (2*Math.PI) / steps;
-        var ellipsoidal_factor = 0.1;
-        for (int i = 0; i < steps; i++)
-        {
-            positions[i].X = double.ConvertToInteger<int>(
-                _universeCenter+majorAxis*Math.Cos(radStep*i)*Math.Cos(theta)-minorAxis*Math.Sin(radStep*i)*Math.Sin(theta));
-            positions[i].Y = double.ConvertToInteger<int>(
-                _universeCenter+majorAxis*Math.Cos(radStep*i)*Math.Sin(theta)+minorAxis*Math.Sin(radStep*i)*Math.Cos(theta));
-            positions[i].Z = 0;
-            
-            positions[i] = positions[i].Rotate(Axis.X, xTilt);
-            positions[i] = positions[i].Rotate(Axis.Y, yTilt);
-            positions[i] = positions[i].Rotate(Axis.Z, zTilt);
-            //
-            // coordinates[i].X = positions[i].X;
-            // coordinates[i].Y = positions[i].Y;
-        }
+    private static readonly int steps = 100; //Resolution, might need to increase the bigger the distances
+    private static readonly int _universeCenter = GlobalSettings.UniverseSize / 2;
+
+
+   // Theta is rotation against the normal axis before 3d tranformation [rad]
+     public static Vector3[] CreateEllipseInSpace(int minorAxis, int majorAxis, int xTilt = 0, int yTilt = 0,
+         int zTilt = 0, double theta = 0)
+     {
+         var positions = new Vector3[steps];
+         var radStep = (2 * Math.PI) / steps;
+         for (var i = 0; i < steps-1; i++)
+         {
+             positions[i].X = double.ConvertToInteger<int>(
+                 _universeCenter + majorAxis * Math.Cos(radStep * i) * Math.Cos(theta) -
+                 minorAxis * Math.Sin(radStep * i) * Math.Sin(theta));
+             positions[i].Y = double.ConvertToInteger<int>(
+                 _universeCenter + majorAxis * Math.Cos(radStep * i) * Math.Sin(theta) +
+                 minorAxis * Math.Sin(radStep * i) * Math.Cos(theta));
+             positions[i].Z = 0;
+
+             positions[i] = positions[i].Rotate(Axis.X, xTilt);
+             positions[i] = positions[i].Rotate(Axis.Y, yTilt);
+             positions[i] = positions[i].Rotate(Axis.Z, zTilt);
+         }
+
+#if DEBUG
+    PrintArraySize(positions);
+    var coordinates = positions.Select(p => new Coordinates(p.X, p.Y)).ToArray();
+
+    PrintTrajectory(coordinates);
+#endif
+         return positions;
+     }
+     
+     public static Vector3 GetPosition(int minorAxis, int majorAxis, float angle, int xTilt = 0, int yTilt = 0,
+         int zTilt = 0, double theta = 0)
+     {
         
-        #if DEBUG
-        PrintArraySize(positions);
-        #endif
- 
-        return positions;
+         var newPosition = new Vector3
+         {
+             X = double.ConvertToInteger<int>(
+                 _universeCenter + majorAxis * Math.Cos(angle) * Math.Cos(theta) -
+                 minorAxis * Math.Sin(angle) * Math.Sin(theta)),
+             Y = double.ConvertToInteger<int>(
+                 _universeCenter + majorAxis * Math.Cos(angle) * Math.Sin(theta) +
+                 minorAxis * Math.Sin(angle) * Math.Cos(theta)),
+             Z = 0
+         };
+        
+         newPosition = newPosition.Rotate(Axis.X, xTilt);
+         newPosition = newPosition.Rotate(Axis.Y, yTilt);
+         newPosition = newPosition.Rotate(Axis.Z, zTilt);
+        
+         return newPosition;
+     }
+
+     public static float GetPeriod(float radialVelocity)
+     {
+
+         return (float)(2*Math.PI/radialVelocity);
+
+     }
+
+        //https://circumferencecalculator.net/ellipse-perimeter-calculator
+    public static int GetPerimeter(double a, double b)
+    {
+        var h = Math.Pow((a - b) / (a + b), 2);
+        var A = Math.PI*(a+b);
+        var B = 1+(3*h)/(10+Math.Sqrt(4-3*h));
+        return (int)(A*B);
+    }
+    
+    //Claude based on https://www.mathsisfun.com/geometry/ellipse-perimeter.html
+    public static double EllipsePerimeter(double a, double b, int terms = 10)
+    {
+        double h = Math.Pow(a - b, 2) / Math.Pow(a + b, 2);
+        double sum = 1.0;
+        double hPower = h;
+    
+        // Precomputed coefficients for first few terms
+        double[] coeffs = { 0.25, 0.015625, 0.00390625, 0.001525878906 };
+    
+        for (int n = 1; n < Math.Min(terms, coeffs.Length + 1); n++)
+        {
+            sum += coeffs[n-1] * hPower;
+            hPower *= h;
+        }
+    
+        return Math.PI * (a + b) * sum;
     }
 
     private static void PrintArraySize(Vector3[] positions)
     {
-        int structSize = Unsafe.SizeOf<Vector3>();
-        int arraySize = steps * structSize;
+        var structSize = Unsafe.SizeOf<Vector3>();
+        var arraySize = steps * structSize;
         Console.WriteLine($"One Vector3: {structSize} bytes");
         Console.WriteLine($"{steps} Vector3s: {arraySize} bytes ({arraySize / 1024.0:F1} KB)");
     }
-    // void PrintTrajectory()
-    // {
-    //     var plot = new ScottPlot.Plot();
-    //     plot.Add.Scatter(coordinates);
-    //     plot.Axes.SquareUnits();
-    //     plot.SavePng("OrbitalTrajectory.png",4000, 4000);
-    // }
+    private static void PrintTrajectory(Coordinates[] coordinates)
+    {
+        var plot = new ScottPlot.Plot();
+        plot.Add.Scatter(coordinates);
+        plot.Axes.SquareUnits();
+        plot.SavePng("OrbitalTrajectory.png",4000, 4000);
+    }
 }

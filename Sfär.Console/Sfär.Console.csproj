@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Sfär.Core\Sfär.Core.csproj" />
+        <ProjectReference Include="..\Sfär.Core\Sfär.Core.csproj"/>
     </ItemGroup>
 
 </Project>

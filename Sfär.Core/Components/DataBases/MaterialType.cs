@@ -3,6 +3,5 @@
 public enum MaterialType
 {
     Metal,
-    Liquid,
-    
+    Liquid
 }
