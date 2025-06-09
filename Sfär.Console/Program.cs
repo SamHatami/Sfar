@@ -7,7 +7,9 @@ using Sfär.Core.Orbits;
 
 bool isUpdating = false;
 
-SystemManager systemManager = new SystemManager();
+SystemManager.RegisterSystems();
+ComponentManager.RegisterComponents();
+
 Universe universe = new Universe();
 
 universe.Start();
@@ -22,7 +24,7 @@ void TimerOnElapsed(object? sender, ElapsedEventArgs e)
     if(isUpdating) return;
     
     isUpdating = true;
-    systemManager.Update(Time.TimeStep);
+    SystemManager.Update(Time.TimeStep);
     isUpdating = false;
     
     Console.WriteLine($"Cycle: {time.Cycle} {time.Month} {time.Day} {time.Hour}");

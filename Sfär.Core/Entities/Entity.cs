@@ -1,6 +1,6 @@
 ﻿using Sfär.Core.Components;
 using Sfär.Core.Interfaces;
-using Sfär.Core.Registers;
+using Sfär.Core.Managers;
 
 namespace Sfär.Core.Entities;
 public class Entity
@@ -16,28 +16,28 @@ public class Entity
     
     public void AddComponent<T>(T component) where T : IDataComponent
     {
-        var id = ComponentRegistry.GetId<T>();
+        var id = ComponentManager.GetId<T>();
         if(Components[id] != null) return;
         
-        ComponentRegistry.AddToComponentMap<T>(Id);
+        ComponentManager.AddToComponentMap<T>(Id);
         Components[id] = component;
     }
 
     public T GetComponent<T>() where T : IDataComponent
     {
-        var id = ComponentRegistry.GetId<T>();
+        var id = ComponentManager.GetId<T>();
         return (T)Components[id];
     }
 
     public bool HasComponent<T>() where T : IDataComponent
     {
-        var id = ComponentRegistry.GetId<T>();
+        var id = ComponentManager.GetId<T>();
         return Components[id] != null;
     }
 
     public void SetComponent<T>(T component) where T : IDataComponent
     {
-        var id = ComponentRegistry.GetId<T>();
+        var id = ComponentManager.GetId<T>();
         Components[id] = component;
     }
 }

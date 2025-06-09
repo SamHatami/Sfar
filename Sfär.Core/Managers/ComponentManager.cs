@@ -1,63 +1,50 @@
-﻿namespace Sfär.Core.Managers;
+﻿using System.Reflection;
+using Sfär.Core.Interfaces;
 
-public class ComponentManager
+namespace Sfär.Core.Managers;
+
+public static class ComponentManager
 {
+    private static readonly Dictionary<int, List<int>> ComponentMap = new();
+    private static readonly Dictionary<Type, int> ComponentIds = new();
 
-      private Dictionary<int,List<int>> ComponentMap = new(); 
+    public static void RegisterComponents()
+    {
+        var componentTypes = Assembly.GetExecutingAssembly().GetTypes()
+            .Where(t =>
+                t is { IsValueType: true, IsEnum: false, Namespace: "Sfär.Core.Components" });
 
-      private Dictionary<Type, int> ComponentIds = new();
-    
-    
-    //alternativt en Dictionary<int,ulong> där uLong får bit-operation. Men för att få ut index för varje entitet så behövs en loop genom ulong oavsett?
-    public ComponentManager(){
-  
-      var componentTypes = from t in Assembly.GetExecutingAssembly().GetTypes()
-            where t.IsValueType && !t.IsEnum && t.Namespace == "Sfär.Core.Components"
-            select t;
-        
-        for (var i = 0; i < componentTypes.Count(); i++)
-        {
+        var i = 0;
+        foreach (var componentType in componentTypes)
             try
             {
-                var componentType = componentsList[i];
-                
-                if (typeof(IComponent).IsAssignableFrom(componentType))
-                  ComponentIds[componentType] = i; 
+                if (!typeof(IDataComponent).IsAssignableFrom(componentType)) continue;
+                ComponentIds[componentType] = i;
+                i++;
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Could not add component {components.ElementAt(i).Name} to Components");
+                Console.WriteLine($"Could not add component {componentType.FullName} to Components");
             }
-        }
-      
     }
-    //go through assembly and namespace and add to this dictionary instead.....
+    public static int GetId<T>() => ComponentIds[typeof(T)];
 
-    
-
-    public int GetId<T>()
-    {
-        return ComponentIds[typeof(T)];
-    }
-
-    public void AddToComponentMap<T>(int entityId)
+    public static void AddToComponentMap<T>(int entityId)
     {
         var componentId = GetId<T>();
-        
+
         if (!ComponentMap.ContainsKey(componentId))
             ComponentMap.Add(componentId, new List<int>());
-        
+
         var componentMask = ComponentMap[componentId];
         componentMask.Add(entityId);
     }
 
-    public int[] GetEntityIdsFor<T>()
+    public static int[] GetEntityIdsFor<T>()
     {
         var componentId = GetId<T>();
         var componentMask = ComponentMap[componentId];
-       
+
         return componentMask.ToArray();
     }
-
-
 }

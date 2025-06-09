@@ -2,7 +2,6 @@
 using Sfär.Core.Entities;
 using Sfär.Core.Interfaces;
 using Sfär.Core.Managers;
-using Sfär.Core.Registers;
 
 namespace Sfär.Core.Systems;
 
@@ -14,7 +13,7 @@ public class MiningSystem : ISystem
         {
             var entity = EntityManager.Entities[i];
             
-            ComponentRegistry.GetId<MaterialComposition>();
+            ComponentManager.GetId<MaterialComposition>();
             if(!entity.HasComponent<MaterialComposition>()) return;
         
             MaterialComposition? materials = entity.GetComponent<MaterialComposition>();

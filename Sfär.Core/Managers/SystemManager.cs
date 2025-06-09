@@ -3,11 +3,11 @@ using Sfär.Core.Interfaces;
 
 namespace Sfär.Core.Managers;
 
-public class SystemManager
+public static class SystemManager
 {
-    private ISystem[] _systems = new ISystem[100] ;
+    private static ISystem[] _systems = new ISystem[100] ;
     
-    public SystemManager()
+    public static void RegisterSystems()
     {
         var q = from t in Assembly.GetExecutingAssembly().GetTypes()
             where t.IsClass && t.Namespace == "Sfär.Core.Systems"
@@ -29,7 +29,7 @@ public class SystemManager
         
     }
     
-    public void Update(int timeStep)
+    public static void Update(int timeStep)
     {
             foreach (var system in _systems)
             {

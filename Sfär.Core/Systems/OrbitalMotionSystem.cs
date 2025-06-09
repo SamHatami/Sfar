@@ -5,7 +5,6 @@ using Sfär.Core.Entities;
 using Sfär.Core.Interfaces;
 using Sfär.Core.Managers;
 using Sfär.Core.Orbits;
-using Sfär.Core.Registers;
 using Sfär.Core.Utility;
 
 namespace Sfär.Core.Systems;
@@ -14,9 +13,9 @@ public class OrbitalMotionSystem:ISystem
 {
     public void Update(int timeStep) 
     {
-        var orbitalEntitiesIds =ComponentRegistry.GetEntityIdsFor<OrbitalPath>();
-        var positionEntities = ComponentRegistry.GetEntityIdsFor<Position>().ToHashSet();
-        var velocityEntities = ComponentRegistry.GetEntityIdsFor<OrbitalVelocity>().ToHashSet();
+        var orbitalEntitiesIds =ComponentManager.GetEntityIdsFor<OrbitalPath>();
+        var positionEntities = ComponentManager.GetEntityIdsFor<Position>().ToHashSet();
+        var velocityEntities = ComponentManager.GetEntityIdsFor<OrbitalVelocity>().ToHashSet();
         
         foreach(var id in orbitalEntitiesIds) 
         {
