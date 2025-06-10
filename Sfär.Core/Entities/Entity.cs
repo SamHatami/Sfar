@@ -29,7 +29,7 @@ public class Entity
         return (T)Components[id];
     }
 
-    public bool HasComponent<T>() where T : IDataComponent
+    public bool HasComponent<T>() where T : IDataComponent //TryGetComponent?
     {
         var id = ComponentManager.GetId<T>();
         return Components[id] != null;

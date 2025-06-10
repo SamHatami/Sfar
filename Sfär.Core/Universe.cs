@@ -11,7 +11,6 @@ public class Universe
     {
         var entity = EntityManager.CreateEntity();
         
-        entity.AddComponent(new Name("NewPlanet"));
         entity.AddComponent(new OrbitalPath()
         {
             MajorAxis = 5000,

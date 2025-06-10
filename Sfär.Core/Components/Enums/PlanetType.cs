@@ -2,10 +2,11 @@ namespace Sfär.Core.Components.Enums;
 
 public enum PlanetType
 {
-    Ice,
-    Water,
-    Gas,
-    Rock,
-    Iron,
-    Lava
+    Desert,         
+    Ocean,          
+    Frozen,         
+    Volcanic,       
+    Gaseous,       
+    Barren,
+    Corrosive
 }

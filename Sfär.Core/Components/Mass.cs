@@ -4,5 +4,5 @@ namespace Sfär.Core.Components;
 
 public struct Mass : IDataComponent
 {
-    private int Value { get; set; }
+    public int Value { get; set; }
 }

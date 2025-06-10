@@ -5,7 +5,7 @@ namespace Sfär.Core.Managers;
 
 public static class ComponentManager
 {
-    private static readonly Dictionary<int, List<int>> ComponentMap = new();
+    private static readonly Dictionary<int, List<int>> ComponentEntityMap = new();
     private static readonly Dictionary<Type, int> ComponentIds = new();
 
     public static void RegisterComponents()
@@ -33,17 +33,17 @@ public static class ComponentManager
     {
         var componentId = GetId<T>();
 
-        if (!ComponentMap.ContainsKey(componentId))
-            ComponentMap.Add(componentId, new List<int>());
+        if (!ComponentEntityMap.ContainsKey(componentId))
+            ComponentEntityMap.Add(componentId, new List<int>());
 
-        var componentMask = ComponentMap[componentId];
+        var componentMask = ComponentEntityMap[componentId];
         componentMask.Add(entityId);
     }
 
     public static int[] GetEntityIdsFor<T>()
     {
         var componentId = GetId<T>();
-        var componentMask = ComponentMap[componentId];
+        var componentMask = ComponentEntityMap[componentId];
 
         return componentMask.ToArray();
     }

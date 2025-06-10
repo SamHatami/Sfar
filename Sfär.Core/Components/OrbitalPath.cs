@@ -9,6 +9,7 @@ public struct OrbitalPath : IDataComponent
     {
         MajorAxis = majorAxis;
         MinorAxis = minorAxis;
+        MeanDistance = (MajorAxis +  MinorAxis)/2;
         TiltX = tiltX;
         TiltY = tiltY;
         TiltZ = tiltZ;
@@ -16,6 +17,7 @@ public struct OrbitalPath : IDataComponent
         CurrentAngle = currentAngle;
     }
 
+    public int MeanDistance { get; set; }
     public required int MajorAxis { get; set; }
     public required int MinorAxis { get; set; }
     public int TiltX { get; set; }

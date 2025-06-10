@@ -4,5 +4,5 @@ namespace Sfär.Core.Components;
 
 public struct Size : IDataComponent
 {
-    private float Value { get; set; }
+    public float Value { get; set; }
 }
