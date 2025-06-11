@@ -1,7 +1,7 @@
 ﻿using Sfär.Core.Components;
 using Sfär.Core.Entities;
 using Sfär.Core.Managers;
-using Sfär.Core.Orbits;
+using Sfär.Core.Utility.Orbits;
 
 namespace Sfär.Core;
 

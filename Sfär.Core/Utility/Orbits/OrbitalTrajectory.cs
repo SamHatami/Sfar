@@ -1,8 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 using ScottPlot;
-using Sfär.Core.Utility;
+using Sfär.Core.Utility.Math;
 
-namespace Sfär.Core.Orbits;
+namespace Sfär.Core.Utility.Orbits;
 
 public static class OrbitalTrajectory
 {
@@ -17,15 +17,15 @@ public static class OrbitalTrajectory
          int zTilt = 0, double theta = 0)
      {
          var positions = new Vector3[steps];
-         var radStep = (2 * Math.PI) / steps;
+         var radStep = (2 * System.Math.PI) / steps;
          for (var i = 0; i < steps-1; i++)
          {
              positions[i].X = double.ConvertToInteger<int>(
-                 _universeCenter + majorAxis * Math.Cos(radStep * i) * Math.Cos(theta) -
-                 minorAxis * Math.Sin(radStep * i) * Math.Sin(theta));
+                 _universeCenter + majorAxis * System.Math.Cos(radStep * i) * System.Math.Cos(theta) -
+                 minorAxis * System.Math.Sin(radStep * i) * System.Math.Sin(theta));
              positions[i].Y = double.ConvertToInteger<int>(
-                 _universeCenter + majorAxis * Math.Cos(radStep * i) * Math.Sin(theta) +
-                 minorAxis * Math.Sin(radStep * i) * Math.Cos(theta));
+                 _universeCenter + majorAxis * System.Math.Cos(radStep * i) * System.Math.Sin(theta) +
+                 minorAxis * System.Math.Sin(radStep * i) * System.Math.Cos(theta));
              positions[i].Z = 0;
 
              positions[i] = positions[i].Rotate(Axis.X, xTilt);
@@ -49,11 +49,11 @@ public static class OrbitalTrajectory
          var newPosition = new Vector3
          {
              X = double.ConvertToInteger<int>(
-                 _universeCenter + majorAxis * Math.Cos(angle) * Math.Cos(theta) -
-                 minorAxis * Math.Sin(angle) * Math.Sin(theta)),
+                 _universeCenter + majorAxis * System.Math.Cos(angle) * System.Math.Cos(theta) -
+                 minorAxis * System.Math.Sin(angle) * System.Math.Sin(theta)),
              Y = double.ConvertToInteger<int>(
-                 _universeCenter + majorAxis * Math.Cos(angle) * Math.Sin(theta) +
-                 minorAxis * Math.Sin(angle) * Math.Cos(theta)),
+                 _universeCenter + majorAxis * System.Math.Cos(angle) * System.Math.Sin(theta) +
+                 minorAxis * System.Math.Sin(angle) * System.Math.Cos(theta)),
              Z = 0
          };
         
@@ -67,36 +67,36 @@ public static class OrbitalTrajectory
      public static float GetPeriod(float radialVelocity)
      {
 
-         return (float)(2*Math.PI/radialVelocity);
+         return (float)(2*System.Math.PI/radialVelocity);
 
      }
 
         //https://circumferencecalculator.net/ellipse-perimeter-calculator
     public static int GetPerimeter(double a, double b)
     {
-        var h = Math.Pow((a - b) / (a + b), 2);
-        var A = Math.PI*(a+b);
-        var B = 1+(3*h)/(10+Math.Sqrt(4-3*h));
+        var h = System.Math.Pow((a - b) / (a + b), 2);
+        var A = System.Math.PI*(a+b);
+        var B = 1+(3*h)/(10+System.Math.Sqrt(4-3*h));
         return (int)(A*B);
     }
     
     //Claude based on https://www.mathsisfun.com/geometry/ellipse-perimeter.html
     public static double EllipsePerimeter(double a, double b, int terms = 10)
     {
-        double h = Math.Pow(a - b, 2) / Math.Pow(a + b, 2);
+        double h = System.Math.Pow(a - b, 2) / System.Math.Pow(a + b, 2);
         double sum = 1.0;
         double hPower = h;
     
         // Precomputed coefficients for first few terms
         double[] coeffs = { 0.25, 0.015625, 0.00390625, 0.001525878906 };
     
-        for (int n = 1; n < Math.Min(terms, coeffs.Length + 1); n++)
+        for (int n = 1; n < System.Math.Min(terms, coeffs.Length + 1); n++)
         {
             sum += coeffs[n-1] * hPower;
             hPower *= h;
         }
     
-        return Math.PI * (a + b) * sum;
+        return System.Math.PI * (a + b) * sum;
     }
 
     private static void PrintArraySize(Vector3[] positions)

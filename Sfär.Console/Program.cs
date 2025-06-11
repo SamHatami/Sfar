@@ -3,7 +3,6 @@
 using System.Timers;
 using Sfär.Core;
 using Sfär.Core.Managers;
-using Sfär.Core.Orbits;
 
 bool isUpdating = false;
 

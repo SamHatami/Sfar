@@ -1,5 +1,4 @@
-﻿using Sfär.Core.Components.Enums;
-using Sfär.Core.Interfaces;
+﻿using Sfär.Core.Interfaces;
 
 namespace Sfär.Core.Components;
 

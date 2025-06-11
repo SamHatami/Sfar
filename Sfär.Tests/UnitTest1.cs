@@ -1,6 +1,4 @@
-﻿using Sfär.Core.Orbits;
-
-namespace Sfär.Tests;
+﻿namespace Sfär.Tests;
 
 public class UnitTest1
 {

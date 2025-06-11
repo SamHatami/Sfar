@@ -1,4 +1,4 @@
-﻿namespace Sfär.Core.Utility;
+﻿namespace Sfär.Core.Utility.Math;
 
 /// <summary>
 ///     A vector with three integer values, representing a point or a vector in space
@@ -39,7 +39,7 @@ public static class VectorExtension
 
     public static int Distance(this Vector3 vec1, Vector3 vec2)
     {
-        return (int)Math.Sqrt(Math.Pow(vec1.X - vec2.X, 2) + Math.Pow(vec1.Y - vec2.Y, 2) + Math.Pow(vec1.Z - vec2.Z, 2));
+        return (int)System.Math.Sqrt(System.Math.Pow(vec1.X - vec2.X, 2) + System.Math.Pow(vec1.Y - vec2.Y, 2) + System.Math.Pow(vec1.Z - vec2.Z, 2));
         
     }
     public static Vector3 Rotate(this Vector3 vec, Axis axis, int angleRad)
@@ -55,19 +55,19 @@ public static class VectorExtension
 
         return new Vector3
         {
-            X = (int)Math.Round(rotationMatrix[0, 0] * vec.X + rotationMatrix[0, 1] * vec.Y +
-                                rotationMatrix[0, 2] * vec.Z),
-            Y = (int)Math.Round(rotationMatrix[1, 0] * vec.X + rotationMatrix[1, 1] * vec.Y +
-                                rotationMatrix[1, 2] * vec.Z),
-            Z = (int)Math.Round(rotationMatrix[2, 0] * vec.X + rotationMatrix[2, 1] * vec.Y +
-                                rotationMatrix[2, 2] * vec.Z)
+            X = (int)System.Math.Round(rotationMatrix[0, 0] * vec.X + rotationMatrix[0, 1] * vec.Y +
+                                       rotationMatrix[0, 2] * vec.Z),
+            Y = (int)System.Math.Round(rotationMatrix[1, 0] * vec.X + rotationMatrix[1, 1] * vec.Y +
+                                       rotationMatrix[1, 2] * vec.Z),
+            Z = (int)System.Math.Round(rotationMatrix[2, 0] * vec.X + rotationMatrix[2, 1] * vec.Y +
+                                       rotationMatrix[2, 2] * vec.Z)
         };
     }
 
     private static double[,] RotationZ(int angleRad)
     {
-        var cosA = Math.Cos(angleRad);
-        var sinA = Math.Sin(angleRad);
+        var cosA = System.Math.Cos(angleRad);
+        var sinA = System.Math.Sin(angleRad);
         double[,] rotationZ =
         {
             { cosA, sinA, 0 },
@@ -80,8 +80,8 @@ public static class VectorExtension
 
     private static double[,] RotationY(int angleRad)
     {
-        var cosA = Math.Cos(angleRad);
-        var sinA = Math.Sin(angleRad);
+        var cosA = System.Math.Cos(angleRad);
+        var sinA = System.Math.Sin(angleRad);
         double[,] rotationY =
         {
             { cosA, 0, sinA },
@@ -94,8 +94,8 @@ public static class VectorExtension
 
     private static double[,] RotationX(int angleRad)
     {
-        var cosA = Math.Cos(angleRad);
-        var sinA = Math.Sin(angleRad);
+        var cosA = System.Math.Cos(angleRad);
+        var sinA = System.Math.Sin(angleRad);
         double[,] rotationY =
         {
             { 1, 0, 0 },

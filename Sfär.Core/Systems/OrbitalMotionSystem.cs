@@ -1,11 +1,10 @@
 ﻿using ScottPlot;
 using Sfär.Core.Components;
-using Sfär.Core.Components.Enums;
 using Sfär.Core.Entities;
 using Sfär.Core.Interfaces;
 using Sfär.Core.Managers;
-using Sfär.Core.Orbits;
 using Sfär.Core.Utility;
+using Sfär.Core.Utility.Orbits;
 
 namespace Sfär.Core.Systems;
 

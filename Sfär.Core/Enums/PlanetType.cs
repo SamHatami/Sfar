@@ -1,4 +1,4 @@
-namespace Sfär.Core.Components.Enums;
+namespace Sfär.Core.Enums;
 
 public enum PlanetType
 {

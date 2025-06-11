@@ -1,5 +1,7 @@
 ﻿using Sfär.Core.Entities;
 using Sfär.Core.Managers;
+using Sfär.Core.Utility;
+using Sfär.Core.Utility.Math;
 
 namespace Sfär.Core.Generators;
 
@@ -23,6 +25,12 @@ public static class SolarSystemGenerator
         for (var i = 0; i < nrOfPlanets; i++)
         {
             var planetEntity = EntityManager.CreateEntity();
+
+            if (RandomUtils.Probability(PlanetSizes.GiantProbability))
+            {
+                
+            }
+                //planet.Size = random.Next(PlanetSizes.GiantSizeMin, PlanetSizes.GiantSizeMax); //Randomize within
 
 
         }

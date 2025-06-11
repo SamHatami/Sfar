@@ -1,4 +1,4 @@
-﻿using Sfär.Core.Components.DataBases;
+﻿using Sfär.Core.DataBases;
 using Sfär.Core.Interfaces;
 
 namespace Sfär.Core.Components;

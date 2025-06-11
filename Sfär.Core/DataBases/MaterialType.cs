@@ -1,4 +1,4 @@
-﻿namespace Sfär.Core.Components.DataBases;
+﻿namespace Sfär.Core.DataBases;
 
 public enum MaterialType
 {
