@@ -1,5 +1,10 @@
-﻿namespace Sfär.Core.Systems;
+﻿using Sfär.Core.Interfaces;
 
-public class MassSystem
+namespace Sfär.Core.Systems;
+
+public class MassSystem: ISystem
 {
+    public void Update(int timeStep)
+    {
+    }
 }
