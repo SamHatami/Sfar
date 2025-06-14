@@ -4,6 +4,7 @@ using Sfär.Core.Entities;
 using Sfär.Core.Interfaces;
 using Sfär.Core.Managers;
 using Sfär.Core.Utility;
+using Sfär.Core.Utility.Math;
 using Sfär.Core.Utility.Orbits;
 
 namespace Sfär.Core.Systems;
@@ -15,6 +16,7 @@ public class OrbitalMotionSystem:ISystem
         var orbitalEntitiesIds =ComponentManager.GetEntityIdsFor<OrbitalPath>();
         var positionEntities = ComponentManager.GetEntityIdsFor<Position>().ToHashSet();
         var velocityEntities = ComponentManager.GetEntityIdsFor<OrbitalVelocity>().ToHashSet();
+        var parentIds = ComponentManager.GetEntityIdsFor<Parent>().ToHashSet();
         
         foreach(var id in orbitalEntitiesIds) 
         {
@@ -31,12 +33,20 @@ public class OrbitalMotionSystem:ISystem
             orbitData.CurrentAngle = (orbitData.CurrentAngle + timeStep * orbitalVelocity*direction) % (2 * MathF.PI);
             entity.SetComponent(orbitData);
             
+            var centroid = new Vector3();
+            if (parentIds.Contains(id))
+            {
+                var parentId = entity.GetComponent<Parent>().ParentId;
+                centroid = EntityManager.Entities[parentId].GetComponent<Position>().Value;
+            }
+            
             var newPosition = OrbitalTrajectory.GetPosition(
                 orbitData.MinorAxis, 
                 orbitData.MajorAxis, 
                 orbitData.CurrentAngle,
                 orbitData.TiltX, orbitData.TiltY, orbitData.TiltZ, 
-                orbitData.InPlanarRotation);
+                orbitData.InPlanarRotation,
+                centroid);
             
             var positionData = entity.GetComponent<Position>();
             positionData.Value = newPosition;
@@ -47,5 +57,7 @@ public class OrbitalMotionSystem:ISystem
 #endif
             
         }
+        
+
     }
 }

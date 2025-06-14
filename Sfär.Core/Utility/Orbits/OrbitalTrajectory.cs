@@ -43,18 +43,18 @@ public static class OrbitalTrajectory
      }
      
      public static Vector3 GetPosition(int minorAxis, int majorAxis, float angle, int xTilt = 0, int yTilt = 0,
-         int zTilt = 0, double theta = 0)
+         int zTilt = 0, double theta = 0, Vector3 center = default)
      {
         
          var newPosition = new Vector3
          {
              X = double.ConvertToInteger<int>(
-                 _universeCenter + majorAxis * System.Math.Cos(angle) * System.Math.Cos(theta) -
+                 center.X + majorAxis * System.Math.Cos(angle) * System.Math.Cos(theta) -
                  minorAxis * System.Math.Sin(angle) * System.Math.Sin(theta)),
              Y = double.ConvertToInteger<int>(
-                 _universeCenter + majorAxis * System.Math.Cos(angle) * System.Math.Sin(theta) +
+                 center.Y + majorAxis * System.Math.Cos(angle) * System.Math.Sin(theta) +
                  minorAxis * System.Math.Sin(angle) * System.Math.Cos(theta)),
-             Z = 0
+             Z = center.Z
          };
         
          newPosition = newPosition.Rotate(Axis.X, xTilt);
