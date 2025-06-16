@@ -5,9 +5,7 @@ namespace Sfär.Core.Managers;
 
 public static class ComponentManager
 {
-    private static readonly Dictionary<int, List<int>> ComponentEntityMap = new();
-    private static readonly Dictionary<Type, int> ComponentIds = new();
-
+    private static readonly ComponentMap[] ComponentMaps = new ComponentMap[GlobalSettings.MaxComponents];
     public static void RegisterComponents()
     {
         var componentTypes = Assembly.GetExecutingAssembly().GetTypes()
@@ -19,7 +17,7 @@ public static class ComponentManager
             try
             {
                 if (!typeof(IDataComponent).IsAssignableFrom(componentType)) continue;
-                ComponentIds[componentType] = i;
+                ComponentMaps[i] = new ComponentMap(componentType);
                 i++;
             }
             catch (Exception e)
@@ -27,24 +25,24 @@ public static class ComponentManager
                 Console.WriteLine($"Could not add component {componentType.FullName} to Components");
             }
     }
-    public static int GetId<T>() => ComponentIds[typeof(T)];
+    public static int GetId<T>()
+    {
+        for (int i = 0; i < ComponentMaps.Length; i++)
+        {
+            if (ComponentMaps[i].ComponentType == typeof(T))
+                return i;
+        }
+
+        return null;
+    }
 
     public static void AddToComponentMap<T>(int entityId)
     {
-        var componentId = GetId<T>();
-
-        if (!ComponentEntityMap.ContainsKey(componentId))
-            ComponentEntityMap.Add(componentId, new List<int>());
-
-        var componentMask = ComponentEntityMap[componentId];
-        componentMask.Add(entityId);
+        ComponentMaps[GetId<T>()].AddUsage(entityId);
     }
 
-    public static int[] GetEntityIdsFor<T>()
+    public static ReadOnlySpan<int> GetEntityIdsFor<T>()
     {
-        var componentId = GetId<T>();
-        var componentMask = ComponentEntityMap[componentId];
-
-        return componentMask.ToArray();
+        return ComponentMaps[GetId<T>()].GetUsageIds;
     }
 }

@@ -3,7 +3,7 @@
 public static class GlobalSettings
 {
     public const int MaxEntities = 100000;
-    public const int MaxComponents = 64;
+    public const int MaxComponents = 128;
     public const int UniverseSize = 100000000;
 }
 
