@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Sfär.Core.Components;
 using Sfär.Core.Interfaces;
 
 namespace Sfär.Core.Managers;
@@ -6,6 +7,7 @@ namespace Sfär.Core.Managers;
 public static class ComponentManager
 {
     private static readonly ComponentMap[] ComponentMaps = new ComponentMap[GlobalSettings.MaxComponents];
+    private static readonly Dictionary<Type,int> ComponentIdsCache = new(GlobalSettings.MaxComponents);
     public static void RegisterComponents()
     {
         var componentTypes = Assembly.GetExecutingAssembly().GetTypes()
@@ -18,6 +20,7 @@ public static class ComponentManager
             {
                 if (!typeof(IDataComponent).IsAssignableFrom(componentType)) continue;
                 ComponentMaps[i] = new ComponentMap(componentType);
+                ComponentIdsCache[componentType] = i;
                 i++;
             }
             catch (Exception e)
@@ -25,24 +28,11 @@ public static class ComponentManager
                 Console.WriteLine($"Could not add component {componentType.FullName} to Components");
             }
     }
-    public static int GetId<T>()
-    {
-        for (int i = 0; i < ComponentMaps.Length; i++)
-        {
-            if (ComponentMaps[i].ComponentType == typeof(T))
-                return i;
-        }
-
-        return null;
-    }
-
     public static void AddToComponentMap<T>(int entityId)
     {
         ComponentMaps[GetId<T>()].AddUsage(entityId);
     }
-
-    public static ReadOnlySpan<int> GetEntityIdsFor<T>()
-    {
-        return ComponentMaps[GetId<T>()].GetUsageIds;
-    }
+    public static int GetId<T>() => ComponentIdsCache[typeof(T)];
+    public static ReadOnlySpan<int> GetEntityIdsFor<T>() => ComponentMaps[GetId<T>()].GetUsageIds();
+    
 }

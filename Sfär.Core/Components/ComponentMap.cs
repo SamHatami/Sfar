@@ -1,10 +1,11 @@
-using Sfär.Core;
-using Sfär.Core.Enums;
+namespace Sfär.Core.Components;
 
 public struct ComponentMap
 {
     public Type ComponentType { get;}
-    private int[] EntitysId = new int[GlobalSettings.MaxEntities];
+    private int[] _entityIds = new int[GlobalSettings.MaxEntities];
+
+    private int _entityCount = 0;
 
     public ComponentMap(Type componentType)
     {
@@ -13,11 +14,20 @@ public struct ComponentMap
 
     public void AddUsage(int entityId)
     {
-        EntitysId.Append(entityId);
+        _entityIds[_entityCount] = entityId;
+        _entityCount++;
     }
 
-    public ReadOnlySpan<int> GetUsageIds()
+    public void RemoveUsage(int entityId)
     {
-        return EntitysId.AsSpan();
+        for (int i = 0; i < GlobalSettings.MaxEntities; i++)
+        {
+            if (_entityIds[i] != entityId) continue;
+            
+            _entityIds[i] = _entityIds[_entityCount - 1];
+            _entityCount--; 
+        }
     }
+
+    public ReadOnlySpan<int> GetUsageIds() => _entityIds.AsSpan().Slice(0, _entityCount);
 }

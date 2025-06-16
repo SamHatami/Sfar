@@ -7,9 +7,9 @@ namespace Sfär.Core.Generators;
 
 public static class SolarSystemGenerator
 {
-    public static Entity[] Create(int seed = 0)
+    public static Entity?[] Create(int seed = 0)
     {
-        List<Entity> entities = new();
+        List<Entity?> entities = new();
         var random = new Random();
 
         //Create the sun

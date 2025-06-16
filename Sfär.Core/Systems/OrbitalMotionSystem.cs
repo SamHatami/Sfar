@@ -14,9 +14,9 @@ public class OrbitalMotionSystem:ISystem
     public void Update(int timeStep) 
     {
         var orbitalEntitiesIds =ComponentManager.GetEntityIdsFor<OrbitalPath>();
-        var positionEntities = ComponentManager.GetEntityIdsFor<Position>().ToHashSet();
-        var velocityEntities = ComponentManager.GetEntityIdsFor<OrbitalVelocity>().ToHashSet();
-        var parentIds = ComponentManager.GetEntityIdsFor<Parent>().ToHashSet();
+        var positionEntities = ComponentManager.GetEntityIdsFor<Position>();
+        var velocityEntities = ComponentManager.GetEntityIdsFor<OrbitalVelocity>();
+        var parentIds = ComponentManager.GetEntityIdsFor<Parent>();
         
         foreach(var id in orbitalEntitiesIds) 
         {

@@ -5,9 +5,9 @@ namespace Sfär.Core.Managers;
 
 public static class EntityManager
 {  
-    public static Entity[] Entities { get; } = new Entity[MaxEntities]();
+    public static Entity?[] Entities { get; } = new Entity?[MaxEntities];
 
-    public static Entity CreateEntity()
+    public static Entity? CreateEntity()
     {
         var id = GetNextFreeId();
         var entity = new Entity(id);
@@ -15,8 +15,11 @@ public static class EntityManager
         return entity;
     }
 
-    public static void Remove(int id) => Entities[id] == null;
-    
-    private int GetNextFreeId() => Array.FindIndex(Entities, E => E == null);
+    public static void Remove(int id)
+    {
+        Entities[id] = null;
+    }
+
+    private static int GetNextFreeId() => Array.FindIndex(Entities, E => E == null);
     
 }
