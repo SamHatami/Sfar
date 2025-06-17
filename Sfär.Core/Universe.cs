@@ -1,6 +1,7 @@
 ﻿using Sfär.Core.Components;
 using Sfär.Core.Components.Celestial;
 using Sfär.Core.Components.Generic;
+using Sfär.Core.Components.Station;
 using Sfär.Core.Entities;
 using Sfär.Core.Managers;
 using Sfär.Core.Utility.Math;
@@ -12,6 +13,10 @@ public class Universe
 {
     public void Start()
     {
+        //Sfär is always has id 0
+
+        CreateSfär();
+
         // Create the central Sun - stationary at origin
         var sun = EntityManager.CreateEntity();
         sun.AddComponent(new Position() { Value = new Vector3(GlobalSettings.UniverseSize/2, GlobalSettings.UniverseSize/2, 0) });
@@ -410,5 +415,19 @@ public class Universe
         planet10.AddComponent(new Period(OrbitalTrajectory.GetPeriod(0.00002f)));
         planet10.AddComponent(new Size() { Value = 15 }); // Exo size
         planet10.AddComponent(new Name() { Value = "Eris" });
+    }
+
+    private static void CreateSfär()
+    {
+        var sfär = EntityManager.CreateEntity();
+        sfär.AddComponent(new Components.Station.Sfär());
+        sfär.AddComponent(new FusionCore());
+        sfär.AddComponent(new Shield());
+
+        for (int i = 0; i < 10; i++)
+        {
+            var module = EntityManager.CreateEntity();
+            
+        }
     }
 }
