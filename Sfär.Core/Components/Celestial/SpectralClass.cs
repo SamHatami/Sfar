@@ -1,6 +1,6 @@
 ﻿using Sfär.Core.Interfaces;
 
-namespace Sfär.Core.Components;
+namespace Sfär.Core.Components.Celestial;
 
 public struct SpectralClass : IDataComponent
 {

@@ -1,4 +1,4 @@
-namespace Sfär.Core.Components;
+namespace Sfär.Core.Components.Station;
 
 public struct Shield
 {

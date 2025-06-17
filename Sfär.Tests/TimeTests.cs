@@ -10,7 +10,7 @@ public class TimeTests
     [Fact]
     public void TimeStep()
     {
-        time = new Time(0, 0, 0, 0);
+        time = new Time(0, 0, 0);
         time.Start();
         time.timer.Elapsed += TimerOnElapsed;
         Console.ReadKey();

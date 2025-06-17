@@ -5,7 +5,8 @@ namespace Sfär.Core.Managers;
 
 public static class SystemManager
 {
-    private static ISystem[] _systems = new ISystem[100] ;
+    private static ISystem[] _systems = new ISystem[GlobalSettings.MaxSystems] ;
+    private static int _systemsCount;
     
     public static void RegisterSystems()
     {
@@ -13,9 +14,9 @@ public static class SystemManager
             where t.IsClass && t.Namespace == "Sfär.Core.Systems"
             select t;
         
-        _systems = new ISystem[q.Count()];
-
-        for (var i = 0; i < q.Count(); i++)
+        _systemsCount  = q.Count();
+        
+        for (var i = 0; i < _systemsCount; i++)
         {
             try
             {
@@ -31,11 +32,8 @@ public static class SystemManager
     
     public static void Update(int timeStep)
     {
-            foreach (var system in _systems)
-            {
-                if(system == null) continue;
-                
-                system.Update(timeStep);
-            }
+        for (var i = 0; i < _systemsCount; i++)
+            _systems[i].Update(timeStep);
+        
     }
 }

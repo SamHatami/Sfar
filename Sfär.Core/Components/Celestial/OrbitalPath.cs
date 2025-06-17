@@ -1,7 +1,6 @@
 ﻿using Sfär.Core.Interfaces;
-using Sfär.Core.Utility;
 
-namespace Sfär.Core.Components;
+namespace Sfär.Core.Components.Celestial;
 
 public struct OrbitalPath : IDataComponent
 {
@@ -18,13 +17,11 @@ public struct OrbitalPath : IDataComponent
     }
 
     public int MeanDistance { get; set; }
-    public required int MajorAxis { get; set; }
-    public required int MinorAxis { get; set; }
-    public int TiltX { get; set; }
-    public int TiltY { get; set; }
-    public int TiltZ { get; set; }
-    public float InPlanarRotation { get; set; } 
-    public int Perimeter { get; set; }
-    
+    public required int MajorAxis { get; init; }
+    public required int MinorAxis { get; init; }
+    public int TiltX { get; init; }
+    public int TiltY { get; init; }
+    public int TiltZ { get; init; }
+    public float InPlanarRotation { get; init; } 
     public required float CurrentAngle { get; set; }
 }

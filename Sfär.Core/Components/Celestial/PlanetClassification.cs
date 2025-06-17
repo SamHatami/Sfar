@@ -1,7 +1,7 @@
 ﻿using Sfär.Core.Enums;
 using Sfär.Core.Interfaces;
 
-namespace Sfär.Core.Components;
+namespace Sfär.Core.Components.Celestial;
 
 public struct PlanetClassification : IDataComponent
 {

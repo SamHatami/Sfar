@@ -1,4 +1,5 @@
 ﻿using Sfär.Core.Components;
+using Sfär.Core.Components.Celestial;
 using Sfär.Core.Entities;
 using Sfär.Core.Interfaces;
 using Sfär.Core.Managers;

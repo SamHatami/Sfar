@@ -1,7 +1,8 @@
 ﻿using Sfär.Core.Interfaces;
 
-namespace Sfär.Core.Components;
+namespace Sfär.Core.Components.Celestial;
 
+//This is calculated once when the astronomical object is created.
 public struct Period : IDataComponent
 {
     public Period(float totalDays)
