@@ -1,7 +1,7 @@
 ﻿using Sfär.Core.Entities;
 using Sfär.Core.Managers;
 using Sfär.Core.Utility;
-using Sfär.Core.Utility.Math;
+using Sfär.Core.Utility.MathExtension;
 
 namespace Sfär.Core.Generators;
 

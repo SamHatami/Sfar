@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using ScottPlot;
-using Sfär.Core.Utility.Math;
+using Sfär.Core.Utility.MathExtension;
 
 namespace Sfär.Core.Utility.Orbits;
 

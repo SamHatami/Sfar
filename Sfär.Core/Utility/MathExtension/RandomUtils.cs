@@ -1,4 +1,4 @@
-namespace Sfär.Core.Utility.Math;
+namespace Sfär.Core.Utility.MathExtension;
 
 public static class RandomUtils
 {

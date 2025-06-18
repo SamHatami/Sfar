@@ -6,7 +6,7 @@ using Sfär.Core.Entities;
 using Sfär.Core.Interfaces;
 using Sfär.Core.Managers;
 using Sfär.Core.Utility;
-using Sfär.Core.Utility.Math;
+using Sfär.Core.Utility.MathExtension;
 using Sfär.Core.Utility.Orbits;
 
 namespace Sfär.Core.Systems;

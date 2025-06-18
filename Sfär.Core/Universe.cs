@@ -4,7 +4,7 @@ using Sfär.Core.Components.Generic;
 using Sfär.Core.Components.Station;
 using Sfär.Core.Entities;
 using Sfär.Core.Managers;
-using Sfär.Core.Utility.Math;
+using Sfär.Core.Utility.MathExtension;
 using Sfär.Core.Utility.Orbits;
 
 namespace Sfär.Core;

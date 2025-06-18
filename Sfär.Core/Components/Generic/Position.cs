@@ -1,5 +1,5 @@
 ﻿using Sfär.Core.Interfaces;
-using Sfär.Core.Utility.Math;
+using Sfär.Core.Utility.MathExtension;
 
 namespace Sfär.Core.Components.Generic;
 

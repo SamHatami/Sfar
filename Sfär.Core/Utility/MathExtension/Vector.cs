@@ -1,4 +1,4 @@
-﻿namespace Sfär.Core.Utility.Math;
+﻿namespace Sfär.Core.Utility.MathExtension;
 
 /// <summary>
 ///     A vector with three integer values, representing a point or a vector in space
