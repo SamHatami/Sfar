@@ -1,9 +1,9 @@
 using Sfär.Core.Interfaces;
+using Sfär.Core.Utility.MathExtension;
 
 namespace Sfär.Core.Components.Station;
 
 public struct Shield : IDataComponent
 {
-    public int EnergyRequired { get; set; }
-    public int Integrity { get; set; }
+    public Vector3 Nodes { get; set; }
 }
