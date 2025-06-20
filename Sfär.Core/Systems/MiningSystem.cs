@@ -12,12 +12,12 @@ public class MiningSystem : ISystem
     {
         for (int i = 0; i < GlobalSettings.MaxEntities; i++)
         {
-            var entity = EntityManager.Entities[i];
+            var entity = EntityManager.GetEntity(i);
             
             ComponentManager.GetId<MaterialComposition>();
-            if(!entity.HasComponent<MaterialComposition>()) return;
+            MaterialComposition materials;
+            if(!entity.TryGetComponent<MaterialComposition>(out materials)) return;
         
-            MaterialComposition? materials = entity.GetComponent<MaterialComposition>();
         }
 
     }

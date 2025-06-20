@@ -12,7 +12,7 @@ public class Entity
     }
 
     public int Id { get; }
-    public IDataComponent[] Components { get; } 
+    public IDataComponent?[] Components { get; } 
     
     public void AddComponent<T>(T component) where T : IDataComponent
     {
@@ -29,10 +29,11 @@ public class Entity
         return (T)Components[id];
     }
 
-    public bool HasComponent<T>() where T : IDataComponent //TryGetComponent?
+    public bool TryGetComponent<T>(out T component) where T : IDataComponent //TryGetComponent?
     {
         var id = ComponentManager.GetId<T>();
-        return Components[id] != null;
+        component = (T)Components[id];
+        return component != null;
     }
 
     public void SetComponent<T>(T component) where T : IDataComponent

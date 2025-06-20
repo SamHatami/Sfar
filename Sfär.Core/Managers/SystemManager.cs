@@ -8,7 +8,7 @@ public static class SystemManager
     private static ISystem[] _systems = new ISystem[GlobalSettings.MaxSystems] ;
     private static int _systemsCount;
     
-    public static void RegisterSystems()
+    static SystemManager()
     {
         var q = from t in Assembly.GetExecutingAssembly().GetTypes()
             where t.IsClass && t.Namespace == "Sfär.Core.Systems"

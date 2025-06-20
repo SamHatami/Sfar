@@ -1,13 +1,15 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Numerics;
 using System.Timers;
 using Sfär.Core;
 using Sfär.Core.Managers;
+using Sfär.Core.Utility;
 
 bool isUpdating = false;
 
-SystemManager.RegisterSystems();
-ComponentManager.RegisterComponents();
+
+var positions = SfärModuleRegistry.IsWithinBounds(30, 100, new Vector3(10,30,80));
 
 Universe universe = new Universe();
 

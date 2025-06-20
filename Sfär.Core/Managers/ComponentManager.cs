@@ -10,9 +10,9 @@ public static class ComponentManager
     private static readonly Dictionary<Type,int> ComponentIdsCache = new(GlobalSettings.MaxComponents);
     public static void RegisterComponents()
     {
-        var componentTypes = Assembly.GetExecutingAssembly().GetTypes()
+        Span<Type> componentTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t =>
-                t is { IsValueType: true, IsEnum: false, Namespace: "Sfär.Core.Components" });
+                t is { IsValueType: true, IsEnum: false, Namespace: "Sfär.Core.Components" }).ToArray();
 
         var i = 0;
         foreach (var componentType in componentTypes)

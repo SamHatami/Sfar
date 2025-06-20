@@ -13,33 +13,34 @@ namespace Sfär.Core.Systems;
 
 public class OrbitalMotionSystem:ISystem
 {
-    public void Update(int timeStep) 
+    private const float TWO_PI = MathF.PI * 2;
+    public void Update(int timeStep)
     {
-        var orbitalEntitiesIds =ComponentManager.GetEntityIdsFor<OrbitalPath>();
-        var positionEntities = ComponentManager.GetEntityIdsFor<Position>();
-        var velocityEntities = ComponentManager.GetEntityIdsFor<OrbitalVelocity>();
+        var orbitalEntitiesIds = ComponentManager.GetEntityIdsFor<OrbitalPath>();
         var parentIds = ComponentManager.GetEntityIdsFor<Parent>();
         
         foreach(var id in orbitalEntitiesIds) 
         {
-            if(!positionEntities.Contains(id)) continue; //no initial position data.
-            if(!velocityEntities.Contains(id)) continue; //no movement 
-
-            var entity = EntityManager.Entities[id];
-            var orbitalVelocityData = entity.GetComponent<OrbitalVelocity>();
-            var orbitalVelocity = orbitalVelocityData.Value;
-            var direction = orbitalVelocityData.IsClockWise ? -1 : 1;
-            if(orbitalVelocity == 0f) continue; //nothing to update
+            var entity = EntityManager.GetEntity(id);
             
-            var orbitData = entity.GetComponent<OrbitalPath>();
-            orbitData.CurrentAngle = (orbitData.CurrentAngle + timeStep * orbitalVelocity*direction) % (2 * MathF.PI);
-            entity.SetComponent(orbitData);
+            if(!entity.TryGetComponent<OrbitalVelocity>(out var orbitalVelocityData)) 
+                continue;
+            
+            if(!entity.TryGetComponent<OrbitalPath>(out var orbitData))
+                continue;
+            
+            var orbitalVelocity = orbitalVelocityData.Value;
+            if(orbitalVelocity == 0f) 
+                continue; //nothing to update
+            
+            var direction = orbitalVelocityData.IsClockWise ? -1 : 1;
+            orbitData.CurrentAngle = (orbitData.CurrentAngle + timeStep * orbitalVelocity*direction) % TWO_PI;
             
             var centroid = new Vector3();
             if (parentIds.Contains(id))
             {
                 var parentId = entity.GetComponent<Parent>().ParentId;
-                centroid = EntityManager.Entities[parentId].GetComponent<Position>().Value;
+                centroid = EntityManager.GetEntity(parentId).GetComponent<Position>().Value;
             }
             
             var newPosition = OrbitalTrajectory.GetPosition(
@@ -51,7 +52,9 @@ public class OrbitalMotionSystem:ISystem
                 centroid);
             
             var positionData = entity.GetComponent<Position>();
+            
             positionData.Value = newPosition;
+            entity.SetComponent(orbitData);
             entity.SetComponent(positionData);
 
 #if  DEBUG

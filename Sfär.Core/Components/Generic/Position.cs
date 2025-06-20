@@ -5,5 +5,5 @@ namespace Sfär.Core.Components.Generic;
 
 public struct Position : IDataComponent
 {
-    public Vector3 Value { get; set; }
+    public Vector3 Value { get; set; } //Position on Universe-space
 }

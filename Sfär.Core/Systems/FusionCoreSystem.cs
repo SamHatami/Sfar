@@ -11,7 +11,7 @@ public class FusionCoreSystem:ISystem
     private Entity? sfär;
     public void Update(int timeStep)
     {
-        sfär ??= EntityManager.Entities[0];
+        sfär ??= EntityManager.GetEntity(0);
 
         if (sfär is null) return;
         
