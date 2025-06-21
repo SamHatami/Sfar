@@ -1,5 +1,5 @@
 ﻿using System.Timers;
-using Sfär.Core;
+using Simulation.Core;
 
 namespace Sfär.Tests;
 

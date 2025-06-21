@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Sfär.Core\Sfär.Core.csproj" />
+      <ProjectReference Include="..\Simulation.Core\Simulation.Core.csproj" />
     </ItemGroup>
 
 </Project>

@@ -2,9 +2,9 @@
 
 using System.Numerics;
 using System.Timers;
-using Sfär.Core;
-using Sfär.Core.Managers;
-using Sfär.Core.Utility;
+using Simulation.Core;
+using Simulation.Core.Managers;
+using Simulation.Core.Utility;
 
 bool isUpdating = false;
 

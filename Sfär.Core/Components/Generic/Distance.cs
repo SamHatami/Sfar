@@ -1,8 +1,0 @@
-﻿using Sfär.Core.Interfaces;
-
-namespace Sfär.Core.Components.Generic;
-
-public struct Distance : IDataComponent
-{
-    public float Value { get; set; } // some type of atronomical unit
-}
