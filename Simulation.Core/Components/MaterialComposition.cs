@@ -5,5 +5,5 @@ namespace Simulation.Core.Components;
 
 public struct MaterialComposition : IDataComponent
 {
-    public Dictionary<MaterialType, int> Materials { get; set; }
+    // public Dictionary<MaterialType, int> Materials { get; set; }
 }

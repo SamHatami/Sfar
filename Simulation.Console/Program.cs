@@ -28,7 +28,7 @@ void TimerOnElapsed(object? sender, ElapsedEventArgs e)
     SystemManager.Update(Time.TimeStep);
     isUpdating = false;
     
-    Console.WriteLine($"Cycle: {time.Cycle} {time.Month} {time.Day} {time.Hour}");
+    // Console.WriteLine($"Cycle: {time.Cycle} {time.Month} {time.Day} {time.Hour}");
 
 }
 

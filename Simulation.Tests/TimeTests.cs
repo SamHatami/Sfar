@@ -17,7 +17,7 @@ public class TimeTests
     }
     private void TimerOnElapsed(object? sender, ElapsedEventArgs e)
     {
-        Console.WriteLine($"Cycle: {time.Cycle} {time.Month} {time.Day} {time.Hour}");
+        // Console.WriteLine($"Cycle: {time.Cycle} {time.Month} {time.Day} {time.Hour}");
     }
 }
 

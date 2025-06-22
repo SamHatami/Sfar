@@ -36,9 +36,9 @@ public class OrbitalMotionSystem:ISystem
             orbitData.CurrentAngle = (orbitData.CurrentAngle + timeStep * orbitalVelocity * direction) % TWO_PI;
 
             var centroid = new Vector3();
-            if (parentIds.Contains(id))
+            if (parentIds.Contains(id) && entity.TryGetComponent<Parent>(out var parent))
             {
-                var parentId = entity.GetComponent<Parent>().ParentId;
+                var parentId = parent.ParentId;
                 centroid = EntityManager.GetEntity(parentId).GetComponent<Position>().Value;
             }
 
@@ -56,10 +56,10 @@ public class OrbitalMotionSystem:ISystem
             entity.SetComponent(orbitData);
             entity.SetComponent(positionData);
 
-#if DEBUG
-            Console.WriteLine(
-                $"Angle: {orbitData.CurrentAngle:F4} | Pos: {newPosition.X}|{newPosition.Y}|{newPosition.Z}");
-#endif
+// #if DEBUG
+//             Console.WriteLine(
+//                 $"Angle: {orbitData.CurrentAngle:F4} | Pos: {newPosition.X}|{newPosition.Y}|{newPosition.Z}");
+// #endif
         }
     }
 }
