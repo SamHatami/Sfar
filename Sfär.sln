@@ -2,9 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulation.Core", "Simulation.Core\Simulation.Core.csproj", "{E918E8EF-1FB3-4D42-8AB8-B0CCF15B8731}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfär.Console", "Sfär.Console\Sfär.Console.csproj", "{BF55DEC0-5D01-4BC6-9F47-50770AE2A76F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulation.Console", "Simulation.Console\Simulation.Console.csproj", "{BF55DEC0-5D01-4BC6-9F47-50770AE2A76F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfär.Tests", "Sfär.Tests\Sfär.Tests.csproj", "{1C440E85-6598-4467-B46C-588CE26114E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulation.Tests", "Simulation.Tests\Simulation.Tests.csproj", "{1C440E85-6598-4467-B46C-588CE26114E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-﻿namespace Sfär.Tests;
+﻿namespace Simulation.Tests;
 
 public class UnitTest1
 {

@@ -1,7 +1,7 @@
 ﻿using System.Timers;
 using Simulation.Core;
 
-namespace Sfär.Tests;
+namespace Simulation.Tests;
 
 public class TimeTests
 {
