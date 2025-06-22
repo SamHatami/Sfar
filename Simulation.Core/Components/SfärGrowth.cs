@@ -1,7 +1,11 @@
-﻿namespace Simulation.Core.Components;
+﻿using Simulation.Core.Enums.Station;
+using Simulation.Core.Interfaces;
 
-public class SfärGrowth
+namespace Simulation.Core.Components;
+
+public struct SfärGrowth :IDataComponent
 {
-    //Growth is an 
-     
+    public GrowthState GrowthState { get; set; }
+    public int RestCyclesRemaining { get; set; }
+    public float GrowthProgress { get; set; }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using Simulation.Core.Components;
+using Simulation.Core.Enums.Station;
 using Simulation.Core.Interfaces;
 using Simulation.Core.Managers;
 
@@ -19,6 +20,9 @@ public class SfärStateSystem: ISystem
         if(!sfärEntity.TryGetComponent<SfärState>(out var sfärInternalState)) return;
         if(!sfärEntity.TryGetComponent<PowerGeneration>(out var powerGeneration)) return;
         if(!sfärEntity.TryGetComponent<PowerConsumption>(out var powerConsumption)) return;
+        if(!sfärEntity.TryGetComponent<SfärGrowth>(out var sfärGrowth)) return;
+        
+        // if(sfärGrowth.GrowthState == GrowthState.Resting) return; //Resting state does not change state ( temperature and pressure)
         
         var surplus = powerGeneration.Value - powerConsumption.Value;
         

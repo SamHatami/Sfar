@@ -22,11 +22,14 @@ public class SfärShieldSystem :ISystem
 
         if (shield.ShieldSize == 0)
         {
-            shield.ShieldSize = (int)(4 * Math.PI * sfär.outerBound);
             shield.Nodes = FibbonaciSpiral.GetNodes(200, sfär.outerBound);
-            shield.PowerConsumption = 10; //*Math.Sin()
         }
         
+        //skip update if size havent changed
+        shield.ShieldSize = (int)(4 * Math.PI * sfär.outerBound);
+        shield.PowerConsumption = sfär.outerBound * sfär.outerBound / 100; //*Math.Sin()
+        
+        sfärEntity.SetComponent(shield);
         //Get shield componen
         //get Sfär outerbounds
         //get SfärCore current load

@@ -9,6 +9,7 @@ public class MiningSystem : ISystem
 {
     public void Update(int timeStep)
     {
+        //Oh the dream...
         for (int i = 0; i < GlobalSettings.MaxEntities; i++)
         {
             var entity = EntityManager.GetEntity(i);
