@@ -5,5 +5,5 @@ namespace Simulation.Core.Components.Station;
 
 public struct ModulePosition:IDataComponent
 {
-    public Vector3 Value{ get; set; } //Position in SfärSpace not in Universe space
+    public Vector3 Value { get; init; } //Position in SfärSpace not in Universe space
 }

@@ -6,8 +6,8 @@ namespace Simulation.Core.Components.Station;
 
 public struct SfärModule:IDataComponent
 {
-    public ModuleType ModuleType { get; set; }
-    public Vector3[] Slots { get; set; }
+    public ModuleType ModuleType { get; init; }
+    public Vector3[] Slots { get; init; }
     //connection ports?
     //I have a feeling that a full transform component will be needed here... 
 }

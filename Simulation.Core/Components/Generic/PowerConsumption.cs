@@ -1,6 +1,6 @@
 using Simulation.Core.Interfaces;
 
-namespace Simulation.Core.Components.Station;
+namespace Simulation.Core.Components.Generic;
 
 public struct PowerConsumption : IDataComponent
 {

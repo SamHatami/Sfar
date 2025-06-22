@@ -4,6 +4,6 @@ namespace Simulation.Core.Components.Generic;
 
 public struct Capacity: IDataComponent
 {
-    public int Max { get; set; }
-    public int Current { get; set; }
+    public int Max { get; init; }
+    public int Current { get; init; }
 }

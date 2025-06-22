@@ -426,7 +426,8 @@ public class Universe
     {
         var sfär = EntityManager.CreateEntity();
         sfär.AddComponent(new Components.Station.Sfär(){innerBound = 20, outerBound = 40});
-        sfär.AddComponent(new SfärCore(){PowerGeneration = 50, PowerConsumption = 0});
+        sfär.AddComponent(new PowerConsumption());
+        sfär.AddComponent(new PowerGeneration(){Value = 20});
         sfär.AddComponent(new Age(){Value = 0});
         sfär.AddComponent(new SfärState());
         sfär.AddComponent(new SfärShield());
