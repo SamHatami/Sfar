@@ -1,9 +1,8 @@
-﻿using Simulation.Core.Enums.Station;
-using Simulation.Core.Components.Generic;
-using Simulation.Core.Components.Station;
+﻿using Simulation.Core.Components;
+using Simulation.Core.Enums.Station;
 using Simulation.Core.Interfaces;
 using Simulation.Core.Managers;
-using SfärModule = Simulation.Core.Components.Station.SfärModule;
+using SfärModule = Simulation.Core.Components.SfärModule;
 
 namespace Simulation.Core.Entities;
 
@@ -15,7 +14,7 @@ public class SfärEntityFactory: IEntityFactory
     public Entity Create()
     {
         var sfärEntity = EntityManager.CreateEntity();
-        sfärEntity.AddComponent(new Components.Station.Sfär(){innerBound = 20, outerBound = 40});
+        sfärEntity.AddComponent(new Sfär(){innerBound = 20, outerBound = 40});
         sfärEntity.AddComponent(new PowerConsumption());
         sfärEntity.AddComponent(new PowerGeneration(){Value = 20});
         sfärEntity.AddComponent(new Age(){Value = 0});

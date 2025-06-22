@@ -1,4 +1,4 @@
-﻿using Simulation.Core.Components.Station;
+﻿using Simulation.Core.Components;
 using Simulation.Core.Interfaces;
 using Simulation.Core.Managers;
 using Simulation.Core.Utility.MathExtension;

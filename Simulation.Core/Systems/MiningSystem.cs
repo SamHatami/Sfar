@@ -1,6 +1,5 @@
 ﻿using Simulation.Core.Components;
 using Simulation.Core.Entities;
-using Simulation.Core.Components.Celestial;
 using Simulation.Core.Interfaces;
 using Simulation.Core.Managers;
 

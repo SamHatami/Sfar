@@ -2,9 +2,6 @@
 using Simulation.Core.Entities;
 using Simulation.Core.Enums.Station;
 using Simulation.Core.Utility;
-using Simulation.Core.Components.Celestial;
-using Simulation.Core.Components.Generic;
-using Simulation.Core.Components.Station;
 using Simulation.Core.Managers;
 using Simulation.Core.Systems;
 using Simulation.Core.Utility.MathExtension;
@@ -18,6 +15,7 @@ public class Universe
     {
         //Sfär is always has id 0
 
+        
         CreateSfär();
     
         #region Planets,Moons,Stars
@@ -424,13 +422,13 @@ public class Universe
 
     private static void CreateSfär()
     {
-        var sfär = EntityManager.CreateEntity();
-        sfär.AddComponent(new Components.Station.Sfär(){innerBound = 20, outerBound = 40});
-        sfär.AddComponent(new PowerConsumption());
-        sfär.AddComponent(new PowerGeneration(){Value = 20});
-        sfär.AddComponent(new Age(){Value = 0});
-        sfär.AddComponent(new SfärState());
-        sfär.AddComponent(new SfärShield());
+        var sfärEntity = EntityManager.CreateEntity();
+        sfärEntity.AddComponent(new Sfär(){innerBound = 20, outerBound = 40});
+        sfärEntity.AddComponent(new PowerConsumption());
+        sfärEntity.AddComponent(new PowerGeneration(){Value = 20});
+        sfärEntity.AddComponent(new Age(){Value = 0});
+        sfärEntity.AddComponent(new SfärState());
+        sfärEntity.AddComponent(new SfärShield());
         
     }
 }

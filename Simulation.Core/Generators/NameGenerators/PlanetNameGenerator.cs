@@ -1,6 +1,4 @@
 ﻿using Simulation.Core.Components;
-using Simulation.Core.Components.Celestial;
-using Simulation.Core.Components.Generic;
 using Simulation.Core.Entities;
 using Simulation.Core.Interfaces;
 

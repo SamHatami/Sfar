@@ -2,8 +2,6 @@
 using Simulation.Core.Components;
 using Simulation.Core.Entities;
 using Simulation.Core.Utility;
-using Simulation.Core.Components.Celestial;
-using Simulation.Core.Components.Generic;
 using Simulation.Core.Interfaces;
 using Simulation.Core.Managers;
 using Simulation.Core.Utility.MathExtension;
