@@ -9,10 +9,10 @@ namespace Simulation.Core.Systems;
 public class SfärGrowthSystem : ISystem
 {
     private int _initialOuterBound = -1;
-    private const float MaxTemperature = 102f;
-    private const float MaxPressure = 1.03f;
+    private const int MaxTemperature = 121;
+    private const int MaxPressure = 16;
     private const int GrowthAmount = 40;
-    private const int RestCycles = 30;
+    private const int RestCycles = 50;
     
     public void Update(int timeStep)
     {

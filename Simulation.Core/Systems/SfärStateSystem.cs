@@ -8,7 +8,7 @@ namespace Simulation.Core.Systems;
 
 public class SfärStateSystem: ISystem
 {
-    private const float specificHeat = 0.1f;
+    private const float specificHeat = 0.025f;
     private const float gasDensity = 0.05f;
     private const double C1 = 4d/3d*Math.PI;  
     public void Update(int timeStep)
@@ -22,7 +22,6 @@ public class SfärStateSystem: ISystem
         if(!sfärEntity.TryGetComponent<PowerConsumption>(out var powerConsumption)) return;
         if(!sfärEntity.TryGetComponent<SfärGrowth>(out var sfärGrowth)) return;
         
-        // if(sfärGrowth.GrowthState == GrowthState.Resting) return; //Resting state does not change state ( temperature and pressure)
         
         var surplus = powerGeneration.Value - powerConsumption.Value;
         
@@ -34,12 +33,17 @@ public class SfärStateSystem: ISystem
         var thermalMass = gasVolume * gasDensity * specificHeat;
         var dT = (float)(surplus * timeStep / thermalMass);
         var t1 = sfärInternalState.InternalTemperature;
+        
+        //cool off when resting
+        if(sfärGrowth.GrowthState == GrowthState.Resting && sfärGrowth.RestCyclesRemaining > 0)
+             dT = -dT;
+        
         var t2 = t1 + dT;
+
+        float newTemp = sfärInternalState.InternalTemperature + dT;
+        float newPressure = sfärInternalState.InternalPressure * (float)Math.Pow(t2 / t1, 2);
         
-        var newTemp = sfärInternalState.InternalTemperature + dT;
-        var newPressure = sfärInternalState.InternalPressure * t2/t1 ;
-        
-        sfärEntity.SetComponent(new SfärState(){InternalTemperature = newTemp, InternalPressure = newPressure});
+        sfärEntity.SetComponent(new SfärState(){InternalTemperature = newTemp, InternalPressure = (float)newPressure});
         Console.WriteLine(sfärInternalState.InternalTemperature);
         Console.WriteLine(sfärInternalState.InternalPressure);
         

@@ -427,7 +427,7 @@ public class Universe
         sfärEntity.AddComponent(new PowerConsumption());
         sfärEntity.AddComponent(new PowerGeneration(){Value = 20});
         sfärEntity.AddComponent(new Age(){Value = 0});
-        sfärEntity.AddComponent(new SfärState() {InternalPressure = 1, InternalTemperature = 100});
+        sfärEntity.AddComponent(new SfärState() {InternalPressure = 15, InternalTemperature = 115});
         sfärEntity.AddComponent(new SfärShield());
         sfärEntity.AddComponent(new SfärGrowth(){GrowthState = GrowthState.Resting});
         
