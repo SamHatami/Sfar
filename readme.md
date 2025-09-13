@@ -1,135 +1,134 @@
-# Sfär Simulation Project Documentation
+## Core Concept
+A space-based mechorganic simulator centered around a massive spherical space station (the "Sfär") that operates as an autonomous entity. The Sfär is mechorganic - a mechanical structure with organic behaviors and growth patterns.
 
-## Project Overview
-
-**Sfär** is a space-based Entity Component System (ECS) simulation written in C# targeting .NET 9.0. The project simulates a growing space station called a "Sfär" alongside a complex solar system with realistic orbital mechanics.
-
-## What is a Sfär?
-
-A Sfär is a spherical space station that serves as the central focus of the simulation. Key characteristics:
-
-- **Growing Structure**: The Sfär can expand its outer boundary from an initial size, creating more space for modules
-- **Power Management**: Requires energy to maintain its shield and internal systems
-- **Modular Design**: Contains various modules (scaffolding, structural, service, living quarters, etc.)
-- **Environmental Systems**: Maintains internal temperature and pressure
-- **Shield System**: Protects the station using a Fibonacci spiral node arrangement
-
-## Core Systems
-
-### Entity Component System (ECS) Architecture
-
-The project implements a custom ECS pattern:
-
-- **Entities**: Represent objects in the simulation (planets, moons, Sfär, modules)
-- **Components**: Data containers (Position, Mass, OrbitalPath, PowerGeneration, etc.)
-- **Systems**: Logic processors that operate on entities with specific component combinations
-
-### Key Systems
-
-1. **OrbitalMotionSystem**: Handles realistic elliptical orbital mechanics for celestial bodies
-2. **SfärGrowthSystem**: Manages the expansion and contraction cycles of the Sfär
-3. **SfärPowerConsumptionSystem**: Calculates total power usage across all modules
-4. **SfärShieldSystem**: Manages the protective shield using Fibonacci spiral geometry
-5. **SfärStateSystem**: Simulates internal thermodynamics (temperature/pressure)
-
-### Time Management
-
-- Custom time system with configurable time steps
-- Hierarchical time units: Hours → Days → Months → Cycles
-- Real-time simulation with timer-based updates
-
-## Technical Architecture
-
-### Project Structure
-
-```
-Sfär.sln
-├── Simulation.Core/        # Main simulation logic
-│   ├── Components/         # ECS data components
-│   ├── Systems/           # ECS logic systems
-│   ├── Entities/          # Entity definitions and factories
-│   ├── Managers/          # System coordination
-│   ├── Utility/           # Math helpers and extensions
-│   └── Generators/        # Content generation (names, solar systems)
-├── Simulation.Console/     # Console application entry point
-└── Simulation.Tests/       # Unit tests
-```
-
-### Key Technical Features
-
-- **Custom Vector3 Implementation**: Integer-based 3D vectors for space coordinates
-- **Orbital Mechanics**: Parametric ellipse calculations with 3D rotations
-- **Component Management**: Type-safe component storage with reflection-based registration
-- **Fibonacci Spiral Shield**: Mathematically distributed shield nodes on sphere surface
-- **Thermodynamics Simulation**: Gas laws for internal Sfär atmosphere
-
-### Performance Considerations
-
-- Maximum 5,000 entities supported
-- Array-based storage for cache efficiency
-- Span<T> usage for high-performance iterations
-- Component type mapping with pre-computed IDs
-
-## Solar System Simulation
-
-The simulation includes a detailed 10-planet solar system with:
-
-- **Central Star**: Sol with realistic mass and luminosity
-- **Planetary Variety**: Rocky planets, gas giants, ice giants, and dwarf planets
-- **Complex Orbits**: Elliptical paths with realistic eccentricity and inclination
-- **Moon Systems**: Major moons for gas giants with their own orbital mechanics
-- **Diverse Properties**: Planet classification by size and type
-
-### Notable Celestial Bodies
-
-- **Mercurius**: Fast, close Mercury-like planet
-- **Venusia**: Retrograde rotation Venus analogue
-- **Terra**: Earth-like with Luna moon
-- **Jovius**: Gas giant with 4 major moons (Io, Europa, Ganymede, Callisto)
-- **Saturnus**: Ringed gas giant with Titan, Enceladus, and Mimas
-- **Urania**: Extremely tilted ice giant (98° tilt)
-- **Plutonius**: Distant dwarf planet with binary moon Charon
+The Sfär is not directly controlled. Instead, it responds to environmental stimuli and conditions. Players can influence it through inputs and outputs, but the Sfär decides when and how to grow based on its internal state.
 
 ## Sfär Growth Mechanics
 
-The Sfär undergoes growth cycles:
+### Autonomous Breathing Cycle
+The Sfär naturally pulses in growth cycles driven by its internal state:
+- **Energy Surplus → Heat Buildup → Internal Pressure → Thermal Expansion**
+- **Core strengthens → Shield expands outward → New module slots appear**
+- **Without structural support → Pressure equalizes → Contracts back to original size**
 
-1. **Resting Phase**: Cooling down, pressure/temperature decrease
-2. **Growth Phase**: When internal conditions exceed thresholds (121°C, 16 pressure units)
-3. **Shrinking Phase**: Returns to original size after reaching maximum expansion
-4. **Cycle Repeat**: 50 rest cycles between growth periods
+### Growth Stabilization
+- **Scaffolding** acts as a structural "ratchet" that can lock expanded states
+- Must be built during expansion phase to capture growth permanently
+- Without scaffolding, all growth is temporary
 
-## Dependencies
+### Equilibrium State
+Initial goal is achieving stable equilibrium where the Sfär can self-sustain and grow naturally. Growth spurts happen more frequently when small, less frequently as size increases.
 
-- **.NET 9.0**: Latest .NET runtime
-- **ScottPlot 5.0.55**: For trajectory visualization and debugging
-- **xUnit**: Testing framework
+## The Sfär Entity
 
-## Development Notes
+### Core Physical Properties
+- **Internal Temperature**: Heat buildup from energy surplus
+- **Internal Pressure**: Physical stress driving expansion
+- **Power Generation**: Fusion core capacity (increases with growth spurts and modules)
+- **Power Consumption**: Shield maintenance + module consumption (per time step)
+- **Structural Integrity**: Affected by size and scaffolding support
 
-### Debugging Features
+### Modular Architecture
+The Sfär consists of interlocking modules that create different behaviors affecting core growth:
+- **Size**: Physical space requirements
+- **Mass**: Affects station gravity and dynamics
+- **Power Consumption**: Energy drain per time step
+- **Function**: Specialized behaviors (energy generation, resource processing, etc.)
 
-- Trajectory plotting for orbital paths
-- Console output for thermodynamic values
-- Real-time position tracking for celestial bodies
+## Energy Systems
 
-### Future Expansion Possibilities
+### Fusion Core
+- **Power Generation**: Primary energy source, capacity increases through growth
+- **Shield Generation**: Maintains protective barrier around station
+- **Heat Production**: Excess energy creates thermal pressure driving growth
 
-- Mining systems for resource extraction
-- Advanced module types and connections
-- Multiplayer or AI-controlled entities
-- More complex physics simulations
-- Visual rendering system
+### Energy Sources
+- **Solar Energy**: Space-deployed panels collected by automated drones
+- **Battery Modules**: Store raw energy for core fuel
+- **Secondary Cores**: Advanced fusion systems for major expansion (late development)
 
-## Getting Started
+### Power Balance
+- **Positive Net Power**: Enables growth conditions (heat buildup)
+- **Equilibrium**: Stable state, minimal growth activity
+- **Deficit**: System stress, potential shutdown risk
 
-1. **Build**: Standard .NET build process
-2. **Run**: Execute Simulation.Console project
-3. **Observe**: Watch console for system status updates
-4. **Interact**: Press any key to stop simulation
+## Sfär Spatial Architecture
 
-The simulation runs in real-time with 100ms ticks, where each tick represents one in-game hour. The time step can be adjusted for faster simulation speeds.
+### Spherical Construction
+- **Layer-Based**: Built in concentric spherical layers around core
+- **Radial Modules**: Rectangular modules extending outward from center
+- **Scaffolding**: Structural framework enabling permanent expansion
+- **Shield Boundary**: Protective barrier defining current Sfär size
+
+### Space Management
+- **Dynamic Capacity**: Sfär size determines available module slots
+- **Growth Spurts**: Temporarily expand available space
+- **Structural Locking**: Scaffolding makes expansions permanent
+
+### Interstitial Systems
+Gaps between modules serve critical functions:
+- **Structural Support**: Scaffolding and reinforcement
+- **Resource Transport**: Material and energy distribution
+- **Drone Corridors**: Automated system access
+
+## Mining & Resource Extraction
+
+### Resource Acquisition
+- **Mining Vessels**: Deploy to target celestial bodies
+- **Outpost Establishment**: Time-based deployment and spin-up
+- **Automated Transport**: Cargo ships return materials to Sfär
+- **Processing**: Raw materials converted to components and fuel
+
+### Integration with Sfär
+- **Resource Input**: Materials feed Sfär growth and module construction
+- **Energy Conversion**: Raw materials processed into core fuel
+- **Organic Response**: Sfär reacts to resource availability
+
+## Galaxy & Resource Systems
+
+### Procedural Universe
+- **100,000+ celestial bodies** available for resource extraction
+- **All objects harvestable** (technology permitting)
+- **Dynamic resource distribution** affecting Sfär growth patterns
+
+### Material Types
+- **Primary Resources**: Iron, Copper (base materials)
+- **Energy Materials**: Fusion fuel components
+- **Structural Materials**: Scaffolding and module construction
+- **Complex Compounds**: Advanced module requirements
+
+## Sfär Chemical/Mechanical Process System
+
+### Organic Processing
+The Sfär operates as a complex chemical processing facility:
+- **Compound Memory**: Full component history retained in all materials
+- **Selective Extraction**: Multiple separation methods yield different variants
+- **Emergent Chemistry**: Unexpected reactions from complex combinations
+- **Core Integration**: Processed compounds affect fusion core behavior
+
+### Module Interaction
+- **Generational Effects**: Modules create compounds affecting core properties
+- **Combination Behaviors**: Module mixing produces varied outcomes
+- **Process Chains**: Multi-step transformation sequences
+- **Environmental Factors**: Temperature, pressure, catalysts affect reactions
+
+## Stimuli System
+
+### Growth Triggers
+Beyond basic energy surplus, specific stimuli can alter Sfär behavior:
+- **Environmental Changes**: External conditions affecting growth patterns
+- **Resource Composition**: Different materials triggering different responses
+- **Chemical Compounds**: Processed materials influencing core behavior
+- **Structural Stress**: Size-related factors modifying growth frequency
+
+### Behavioral Modification
+Stimuli can change:
+- **Growth Frequency**: How often expansion attempts occur
+- **Expansion Magnitude**: Size of growth spurts
+- **Energy Thresholds**: Conditions required for growth
+- **Core Sensitivity**: Response to internal pressure changes
 
 ---
 
-*This documentation captures the current state of the Sfär simulation project as a unique blend of space station management, simplified orbital mechanics, and basic thermodynamic simulation within a custom ECS framework.*
+**Development Priority**: Establish stable equilibrium state where Sfär can self-sustain basic growth cycles, then implement stimuli system for behavioral modification.
+
